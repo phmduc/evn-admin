@@ -25,6 +25,11 @@ const productColumns = [
     key: 'deals',
   },
   {
+    title: 'Ngày đầu tư',
+    dataIndex: 'day',
+    key: 'day',
+  },
+  {
     title: 'Giá trị ',
     dataIndex: 'amount',
     key: 'amount',
@@ -67,7 +72,7 @@ const TopProduct = React.memo(() => {
   const productTableData = [];
 
   topObjects.map((value) => {
-    const { id, product_name, user_phone, total_invested} = value;
+    const { id, product_name, user_phone, total_invested, created} = value;
     return productTableData.push({
       key: id,
       productname: (
@@ -76,12 +81,13 @@ const TopProduct = React.memo(() => {
         </div>
       ),
       deals : user_phone,
+      day: created,
       amount: Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(total_invested ) 
     });
   });
 
   return (
-    <div className="full-width-table">
+    <div className="full-width-table table-top">
       <BorderLessHeading>
         <Cards
           title="Top Product"

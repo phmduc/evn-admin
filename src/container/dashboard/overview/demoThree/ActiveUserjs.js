@@ -80,7 +80,7 @@ const ActiveUser = React.memo(() => {
   });
 
   return (
-    <div className="full-width-table">
+    <div className="full-width-table usertop">
       <BorderLessHeading>
         <Cards
           title="Active User"
