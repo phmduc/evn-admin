@@ -14,8 +14,7 @@ const NotFound = lazy(() => import('../../container/pages/404'));
 function DashboardRoutes() {
   return (
     <Routes>
-      <Route index element={<Dashboard />} />
-      <Route path="demo-3" element={<DemoThree />} />
+      <Route index  element={<DemoThree />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

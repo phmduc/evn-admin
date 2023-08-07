@@ -101,12 +101,12 @@ function MenuItems({ toggleCollapsed }) {
   const items = [
 
     getItem(
-      <NavLink onClick={toggleCollapsed} to={`${path}/demo-3`}>
+      <NavLink onClick={toggleCollapsed} to={`${path}`}>
         {t('Dashboard')}
       </NavLink>,
       'dashboard',
       !topMenu && (
-        <NavLink className="menuItem-iocn" to={`${path}/demo-3`}>
+        <NavLink className="menuItem-iocn" to={`${path}`}>
           <UilCreateDashboard />
         </NavLink>
       ),
