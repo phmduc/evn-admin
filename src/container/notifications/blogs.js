@@ -50,7 +50,7 @@ function Notifications() {
           <ProjectSorting>
               <div className="project-sort-bar">
                 <div className="project-sort-search">
-                  <AutoComplete  placeholder="Search projects" />
+                  {/* <AutoComplete  placeholder="Search projects" /> */}
                 </div>
               </div>
             </ProjectSorting>

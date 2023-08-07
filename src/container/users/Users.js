@@ -23,27 +23,30 @@ function Users() {
 
   const dispatch = useDispatch();
   
-  const {  users } = useSelector((state) => {
+  let {  users } = useSelector((state) => {
     return {
       users: state.users.data,
     };
   });
+
+  const [search, setSearch] = useState('')
   useEffect(()=>{
     dispatch(getUsersData())
   },[dispatch])
 
+  const handleSearch = (searchText) => {
+    setSearch(searchText)
+};
 
-  const path = '.';
 
-  console.log(users)
+  const searchResult = users.filter(elem=>{
+    return elem.usermeta.phone.includes(search) 
+  })
 
-  const [state, setState] = useState({
-    current: 0,
-    pageSize: 0,
-    page: 0,
-  });
+  if(searchResult){
+    users = searchResult
+  }
 
-  const { notData } = state;
 
     let usersTableData= []
     users.map((user) => {
@@ -153,9 +156,9 @@ function Users() {
               <>
                 <span className="title-counter">{users.length} Users </span>
                 <AutoComplete
-                  // onSearch={handleSearch}
+                  onSearch={handleSearch}
                   // dataSource={notData}
-                  placeholder="Search by Name"
+                  placeholder="Tìm kiếm bằng số điện thoại"
                   width="100%"
                   patterns
                 />

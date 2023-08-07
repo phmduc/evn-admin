@@ -22,7 +22,6 @@ function ProjectLists(props) {
     projectss = searchResult
   }
 
-  console.log(projectss)
 
   useEffect(() => {
     dispatch(projectGetData())
