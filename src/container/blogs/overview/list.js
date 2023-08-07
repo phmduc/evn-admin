@@ -56,8 +56,8 @@ function BlogsLists() {
  
 
   const dataSource = [];
-  if (blogs && blogs.length>0)
-    blogs.map((value) => {
+  if (blog && blog.length>0)
+    blog.map((value) => {
       if(value.categories.some(elem=>{
         return elem == current;
       })){
