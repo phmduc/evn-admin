@@ -197,7 +197,7 @@ DashboardChart.defaultProps = {
         stepSize: 20,
         padding: 10,
         callback(label) {
-          return `${label}k`;
+          return `${label.toLocaleString('vi-VN')}`;
         },
       },
     },

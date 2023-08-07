@@ -4,7 +4,7 @@ import { DataService } from '../../config/dataService/dataService';
 import { toast } from 'react-toastify';
 
 
-const {commandsReadBegin, commandsReadErr, commandsReadSuccess,  withdrawsReadBegin, withdrawsReadErr, withdrawsReadSuccess, approveBegin, approveErr, approveSuccess, withdrawCommandReadBegin, withdrawCommandReadErr, withdrawCommandReadSuccess } = actions;
+const {projectsReadBegin, projectsReadErr, projectsReadSuccess,commandsReadBegin, commandsReadErr, commandsReadSuccess,  withdrawsReadBegin, withdrawsReadErr, withdrawsReadSuccess, approveBegin, approveErr, approveSuccess, withdrawCommandReadBegin, withdrawCommandReadErr, withdrawCommandReadSuccess } = actions;
 
 const commandGetData = () => {
   return async (dispatch) => {
@@ -14,6 +14,18 @@ const commandGetData = () => {
       dispatch(commandsReadSuccess(initialState.data));
     } catch (err) {
       dispatch(commandsReadErr(err));
+    }
+  };
+};
+
+const projectGetData = () => {
+  return async (dispatch) => {
+    try {
+      dispatch(projectsReadBegin());
+      const initialState = await DataService.get('/wp-json/dbevn/v1/products');
+      dispatch(projectsReadSuccess(initialState.data));
+    } catch (err) {
+      dispatch(projectsReadErr(err));
     }
   };
 };
@@ -60,4 +72,4 @@ const approveGetData = (data) => {
 
 
 
-export { commandGetData, withdrawGetData, approveGetData, withdrawCommand };
+export { commandGetData, withdrawGetData, approveGetData, withdrawCommand, projectGetData };

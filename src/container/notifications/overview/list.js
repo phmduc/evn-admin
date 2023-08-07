@@ -26,11 +26,10 @@ function BlogsLists() {
   }));
   let current
 
-  console.log(category)
 
   if(category.length>0){
     current = category.filter(elem=>{
-     return elem.name == 'Tin tức'
+     return elem.name == 'Thông báo nền tảng'
     })[0].id
   }
 
@@ -42,7 +41,7 @@ function BlogsLists() {
         blogs: blog,
       });
     }
-  }, [blog, dispatch]);
+  }, [blog]);
 
   const onShowSizeChange = (current, pageSize) => {
     setState({ ...state, current, pageSize });

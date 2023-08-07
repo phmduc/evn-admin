@@ -26,8 +26,8 @@ import { blogsCreateData } from '../../redux/blogs/actionCreator';
 import { categoriesGetData } from '../../redux/blogs/actionCreator';
 
 function BlogCreate() {
-   const dispatch = useDispatch();
-   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
 //   const blog = useSelector((state) => state.blog.data);
 //   const params = useParams();
@@ -36,46 +36,46 @@ function BlogCreate() {
 //   }, [params.id, dispatch]);
 
 //   console.log(blog)
-    const author = sessionStorage.getItem('user_id');
+   const author = sessionStorage.getItem('user_id');
 
-    const { TextArea } = Input;
+   const { TextArea } = Input;
 
-    const [value, setValue] = useState('');
+   const [value, setValue] = useState('');
 
-    const [title, setTitle] = useState('');
+   const [title, setTitle] = useState('');
 
-    const [excerpt, setExcerpt] = useState('');
+   const [excerpt, setExcerpt] = useState('');
 
-    const [status, setStatus] = useState('publish');
+   const [status, setStatus] = useState('publish');
 
-    const { category } = useSelector((state) => ({
-      category: state.category.category,
-   
-    }));
-    let current
+   const { category } = useSelector((state) => ({
+     category: state.category.category,
   
-    if(category.length>0){
-      current = category.filter(elem=>{
-       return elem.name == 'Tin tức'
-      })[0].id
-    }
-  
-    const handleCreateSubmit = ()=>{
-      const values={
-        title: title,
-        status: status,
-        excerpt: excerpt,
-        content: value,
-        author: author,
-        categories: [current]
-      }
-      dispatch(blogsCreateData(values, () => {navigate('/admin/blogs/view')}));
+   }));
+   let current
+ 
+   if(category.length>0){
+     current = category.filter(elem=>{
+      return elem.name == 'Thông báo nền tảng'
+     })[0].id
+   }
+ 
+   const handleCreateSubmit = ()=>{
+     const values={
+       title: title,
+       status: status,
+       excerpt: excerpt,
+       content: value,
+       author: author,
+       categories: [current]
+     }
+     dispatch(blogsCreateData(values, () => {navigate('/admin/blogs/notifications/view')}));
 
-    }
+   }
 
-    useEffect(()=>{
-      dispatch(categoriesGetData())
-    },[dispatch])
+   useEffect(()=>{
+     dispatch(categoriesGetData())
+   },[dispatch])
     return (
       <ProjectDetailsWrapper>
         <PageHeader
@@ -83,7 +83,7 @@ function BlogCreate() {
           ghost
           title={
             <div key="1" className="project-header">
-              <Heading as="h2">Tạo mới tin tức</Heading>
+              <Heading as="h2">Tạo mới thông báo</Heading>
             </div>
           }
           buttons={[

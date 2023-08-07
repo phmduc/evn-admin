@@ -19,6 +19,8 @@ const Contact = lazy(() => import('../../container/contact/Contact'));
 const ContactGrid = lazy(() => import('../../container/contact/ContactGrid'));
 const ContactAddNew = lazy(() => import('../../container/contact/AddNew'));
 const Projects = lazy(() => import('./projects'));
+const Commands = lazy(() => import('./commands'));
+
 const Myprofile = lazy(() => import('../../container/profile/myProfile/Index'));
 const Chat = lazy(() => import('../../container/chat/ChatApp'));
 const Inbox = lazy(() => import('../../container/email/Email'));
@@ -59,6 +61,8 @@ const Admin = React.memo(() => {
         <Route path="contact/addNew" element={<ContactAddNew />} />
         <Route path="features/*" element={<Features />} />
         <Route path="project/*" element={<Projects />} />
+        <Route path="command/*" element={<Commands />} />
+
         <Route path="profile/myProfile/*" element={<Myprofile />} />
         <Route path="main/chat/*" element={<Chat />} />
         <Route path="email/*" element={<Inbox />} />

@@ -9,11 +9,10 @@ import { ProjectHeader, ProjectSorting } from './style';
 import { Button } from '../../components/buttons/buttons';
 import { PageHeader } from '../../components/page-headers/page-headers.js';
 import { Main } from '../styled';
-import { categoriesGetData } from '../../redux/blogs/actionCreator';
 
 const List = lazy(() => import('./overview/list'));
 
-function Blogs() {
+function Notifications() {
   const dispatch = useDispatch();
   const { blogs, loading, error } = useSelector((state) => ({
     blogs: state.blogs.blogs,
@@ -21,27 +20,26 @@ function Blogs() {
     error: state.blogs.error,
   }));
 
+  console.log(blogs)
+
   useEffect(() => {
     dispatch(blogsGetData());
-    dispatch(categoriesGetData())
-
   }, [dispatch]);
-
 
   const navigate = useNavigate();
 
   const goto = () =>{
-    navigate('/admin/blogs/create'); // Chuyển hướng đến '/new-page'
+    navigate('/admin/blogs/notifications/create'); // Chuyển hướng đến '/new-page'
   }
 
   return <>
        <ProjectHeader>
         <PageHeader
           className="ninjadash-page-header-main"
-          title="Tin tức"
+          title="Thông báo nền tảng"
           buttons={[
             <Button onClick={goto} key="1" type="primary" size="default">
-              <UilPlus /> Tạo tin tức
+              <UilPlus /> Tạo thông báo
             </Button>,
           ]}
         />
@@ -75,4 +73,4 @@ function Blogs() {
     </>;
 }
 
-export default Blogs;
+export default Notifications;

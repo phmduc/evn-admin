@@ -3,24 +3,29 @@ import { Table } from 'antd';
 import { Link } from 'react-router-dom';
 import { Cards } from '../../../../components/cards/frame/cards-frame';
 import { BorderLessHeading, TableDefaultStyle } from '../../../styled';
-
+import { getUsersData } from '../../../../redux/users/actionCreator';
+import { withdrawGetData } from '../../../../redux/command/actionCreator';
+import { commandGetData } from '../../../../redux/command/actionCreator';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 import tableData from '../../../../demoData/table-data.json';
+import './dash.css'
 
 const { topProduct } = tableData;
 
 const productColumns = [
   {
-    title: 'Product Name',
+    title: 'Tên dự án',
     dataIndex: 'productname',
     key: 'prroductname',
   },
   {
-    title: 'Deals',
+    title: 'Người đầu tư',
     dataIndex: 'deals',
     key: 'deals',
   },
   {
-    title: 'Amount',
+    title: 'Giá trị ',
     dataIndex: 'amount',
     key: 'amount',
   },
@@ -28,6 +33,30 @@ const productColumns = [
 
 const TopProduct = React.memo(() => {
   const [productTab, setProductTab] = useState('today');
+
+  const dispatch = useDispatch();
+  let commands = useSelector((state) => state.commands.commands)
+  let {  users } = useSelector((state) => {
+    return {
+      users: state.users.data,
+    };
+  });
+  let topObjects = [];
+
+  // Sắp xếp mảng theo giá trị value giảm dần
+  topObjects =  commands.sort((a, b) => Number(b.total_invested) - Number(a.total_invested));
+
+  // Lấy 5 đối tượng có giá trị cao nhất
+  topObjects = topObjects.slice(0, 6);
+
+// Kết quả: mảng 5 đối tượng có giá trị cao nhất
+  console.log(topObjects)
+
+  useEffect(()=>{
+    dispatch(getUsersData());
+    dispatch(commandGetData());
+
+  },[dispatch])
 
   /* Tab Activation */
   const handleTabActivation = (value, event) => {
@@ -37,18 +66,17 @@ const TopProduct = React.memo(() => {
 
   const productTableData = [];
 
-  topProduct[productTab].map((value) => {
-    const { key, img, name, deals, amount } = value;
+  topObjects.map((value) => {
+    const { id, product_name, user_phone, total_invested} = value;
     return productTableData.push({
-      key,
+      key: id,
       productname: (
         <div className="ninjadash-info-element align-center-v">
-          <img src={require(`../../../../static/img/products/electronics/${img}`)} alt="ninjadash Product" />
-          <span className="ninjadash-info-element__text">{name}</span>
+          <span className="ninjadash-info-element__text">{product_name}</span>
         </div>
       ),
-      deals,
-      amount,
+      deals : user_phone,
+      amount: Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(total_invested ) 
     });
   });
 
@@ -56,27 +84,6 @@ const TopProduct = React.memo(() => {
     <div className="full-width-table">
       <BorderLessHeading>
         <Cards
-          isbutton={
-            <div className="ninjadash-card-nav">
-              <ul>
-                <li className={productTab === 'today' ? 'ninjadash-active' : 'ninjadash-year'}>
-                  <Link onClick={(event) => handleTabActivation('today', event)} to="#">
-                    Year
-                  </Link>
-                </li>
-                <li className={productTab === 'week' ? 'ninjadash-active' : 'ninjadash-week'}>
-                  <Link onClick={(event) => handleTabActivation('week', event)} to="#">
-                    Week
-                  </Link>
-                </li>
-                <li className={productTab === 'month' ? 'ninjadash-active' : 'ninjadash-month'}>
-                  <Link onClick={(event) => handleTabActivation('month', event)} to="#">
-                    Month
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          }
           title="Top Product"
           size="large"
         >

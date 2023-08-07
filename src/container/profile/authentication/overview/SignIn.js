@@ -60,7 +60,7 @@ function SignIn() {
       <Col xxl={6} xl={8} md={12} sm={18} xs={24}>
         <AuthFormWrap>
           <div className="ninjadash-authentication-top">
-            <h2 className="ninjadash-authentication-top__title">Sign in HexaDash</h2>
+            <h2 className="ninjadash-authentication-top__title">Sign in EVN</h2>
           </div>
           <div className="ninjadash-authentication-content">
             <Form name="login" form={form} onFinish={handleSubmit} layout="vertical">
@@ -76,12 +76,6 @@ function SignIn() {
                 <Input.Password placeholder="Password" />
               </Form.Item>
               <div className="ninjadash-auth-extra-links">
-                <Checkbox onChange={onChange} checked={state.checked}>
-                  Keep me logged in
-                </Checkbox>
-                <NavLink className="forgot-pass-link" to="/forgotPassword">
-                  Forgot password?
-                </NavLink>
               </div>
               <Form.Item>
                 <Button className="btn-signin" htmlType="submit" type="primary" size="large">

@@ -3,64 +3,79 @@ import { Table } from 'antd';
 import { Link } from 'react-router-dom';
 import { Cards } from '../../../../components/cards/frame/cards-frame';
 import { BorderLessHeading, TableDefaultStyle } from '../../../styled';
-
+import { getUsersData } from '../../../../redux/users/actionCreator';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 import tableData from '../../../../demoData/table-data.json';
 
 const { activeUserData } = tableData;
 
 const sellerColumns = [
   {
-    title: 'Username Name',
+    title: 'Số điện thoại',
     dataIndex: 'username',
     key: 'username',
   },
   {
-    title: 'Company',
+    title: 'Rank',
     dataIndex: 'company',
     key: 'company',
   },
+
   {
-    title: 'Product',
-    dataIndex: 'product',
-    key: 'product',
-  },
-  {
-    title: 'Revenue',
+    title: 'Tổng số tiền đầu tư/ Tổng tiền rút ',
     dataIndex: 'revenue',
     key: 'revenue',
   },
   {
-    title: 'Status',
+    title: 'Trạng thái',
     dataIndex: 'status',
     key: 'status',
   },
 ];
 
+
+
 const ActiveUser = React.memo(() => {
+
+  const dispatch = useDispatch()
   const [userTab, setUserTab] = useState('today');
 
+
+  let {  users } = useSelector((state) => {
+    return {
+      users: state.users.data,
+    };
+  });
+
+  const verifiedUsers = users.filter(item => item.usermeta.verify === "Đã xác minh");
+  const topVerifiedUsers = verifiedUsers.slice(0, 6);
+
+  useEffect(()=>{
+    dispatch(getUsersData());
+
+  },[dispatch])
+
+  console.log(users)
   /* Tab Activation */
   const handleTabActivation = (value, e) => {
     e.preventDefault();
-    setUserTab(value);
   };
 
   const userTableData = [];
 
-  activeUserData[userTab].map((value) => {
-    const { key, img, name, company, product, revenue, status } = value;
+ topVerifiedUsers.map((value) => {
+    const { user_id,usermeta:{phone,  rank,  wallet_buyed, wallet_cashed, verify } } = value;
     return userTableData.push({
-      key,
+      key : user_id,
       username: (
         <div className="ninjadash-info-element align-center-v">
-          <img src={require(`../../../../static/img/sellers/${img}`)} alt="ninjadash Img" />
-          <span className="ninjadash-info-element__text">{name}</span>
+          <span className="ninjadash-info-element__text">{phone}</span>
         </div>
       ),
-      company,
-      product,
-      revenue,
-      status: <span className={`status ${status.toLowerCase()}`}>{status}</span>,
+      company: rank,
+      revenue: `${ Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(wallet_buyed ) }/${ Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(wallet_cashed) }`,
+      status: <span className={`status blocked`}>{verify}</span>,
     });
   });
 
@@ -68,27 +83,6 @@ const ActiveUser = React.memo(() => {
     <div className="full-width-table">
       <BorderLessHeading>
         <Cards
-          isbutton={
-            <div className="ninjadash-card-nav">
-              <ul>
-                <li className={userTab === 'today' ? 'ninjadash-active' : 'ninjadash-year'}>
-                  <Link onClick={(event) => handleTabActivation('today', event)} to="#">
-                    Year
-                  </Link>
-                </li>
-                <li className={userTab === 'week' ? 'ninjadash-active' : 'ninjadash-week'}>
-                  <Link onClick={(event) => handleTabActivation('week', event)} to="#">
-                    Week
-                  </Link>
-                </li>
-                <li className={userTab === 'month' ? 'ninjadash-active' : 'ninjadash-month'}>
-                  <Link onClick={(event) => handleTabActivation('month', event)} to="#">
-                    Month
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          }
           title="Active User"
           size="large"
         >

@@ -45,42 +45,57 @@ function Users() {
 
   const { notData } = state;
 
-  // const handleSearch = (searchText) => {
-  //   const data = searchData.filter((item) => item.title.toUpperCase().startsWith(searchText.toUpperCase()));
-  //   setState({
-  //     ...state,
-  //     notData: data,
-  //   });
-  // };
-
-  // const onShowSizeChange = (current, pageSize) => {
-  //   setState({ ...state, current, pageSize });
-  // };
-
-  // const onChange = (page) => {
-  //   setState({ ...state, page });
-  // };
     let usersTableData= []
-    console.log(users)
     users.map((user) => {
-    const { id, name, description, meta: {phone}, } = user;
-      console.log(name)
+    const { user_id,usermeta:{phone, ref_code, rank, wallet, wallet_can_cash,  wallet_buyed, wallet_cashed, verify } } = user;
     return usersTableData.push({
-      key: id,
+      key: user_id,
       user: (
         <div className="user-info">
           <figcaption>
             <Heading className="user-name" as="h6">
-              <Link to={`/admin/user/${id}`}>
-                {name}
+              <Link to={`/admin/user/${user_id}`}>
+                {phone}
               </Link>
             </Heading>
           </figcaption>
         </div>
       ),
+      invite:  
+        <div className="user-info">
+          <figcaption>
+            <Heading className="user-name" as="h6">
+                {ref_code ? ref_code : 'Chưa cập nhật'} 
+            </Heading>
+          </figcaption>
+        </div>,
+      rank:  
+      <div className="user-info">
+        <figcaption>
+          <Heading className="user-name" as="h6">
+              {rank ? rank : 'VIP 0'} 
+          </Heading>
+        </figcaption>
+      </div>,
+      wall:  
+      <div className="user-info">
+        <figcaption>
+          <Heading className="user-name" as="h6">
+            {`${ Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(wallet ) }/${ Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(wallet_can_cash) }`}
+          </Heading>
+        </figcaption>
+      </div>,
+      status: 
+      <div className="user-info">
+      <figcaption>
+        <Heading className="user-name" as="h6">
+            {verify ? verify : 'Chưa xác minh'} 
+        </Heading>
+      </figcaption>
+    </div>,
       action: (
         <div className="table-actions">
-          <Link className="btn-icon" type="info" to={`/admin/user/${id}`} shape="circle">
+          <Link className="btn-icon" type="info" to={`/admin/user/${user_id}`} shape="circle">
             <UilEdit />
           </Link>
           <Button className="btn-icon" type="danger" to="#" shape="circle">
@@ -97,7 +112,26 @@ function Users() {
       dataIndex: 'user',
       key: 'user',
     },
- 
+    {
+      title: 'Mã mời',
+      dataIndex: 'invite',
+      key: 'invite',
+    },
+    {
+      title: 'Hạng TV',
+      dataIndex: 'rank',
+      key: 'rank',
+    },
+    {
+      title: 'Tài sản / có thể rút',
+      dataIndex: 'wall',
+      key: 'wall',
+    },
+    {
+      title: 'Trạng thái',
+      dataIndex: 'status',
+      key: 'status',
+    },
     {
       title: 'Actions',
       dataIndex: 'action',
@@ -112,7 +146,7 @@ function Users() {
       <CardToolbox>
         <UserCarrdTop>
           <PageHeader
-            className="ninjadash-page-header-main"
+            className="ninjadash-page-header-main "
             ghost
             title="Users Card"
             subTitle={
@@ -138,13 +172,13 @@ function Users() {
           />
         </UserCarrdTop>
       </CardToolbox>
-      <Main>
+      <Main >
         <UsercardWrapper>
           <Row gutter={25}>
             <>
               <Cards headless>
                 <UserTableStyleWrapper>
-                  <TableWrapper className="table-responsive">
+                  <TableWrapper className="table-responsive userjs">
                     <Table
                       dataSource={usersTableData}
                       columns={usersTableColumns}

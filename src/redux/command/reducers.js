@@ -1,6 +1,6 @@
 import actions from './actions';
 
-const { COMMANDS_READ_BEGIN, COMMANDS_READ_SUCCESS, COMMANDS_READ_ERR, WITHDRAWCOMMAND_READ_BEGIN, WITHDRAWCOMMAND_READ_ERR, WITHDRAWCOMMAND_READ_SUCCESS, WITHDRAW_READ_BEGIN, WITHDRAW_READ_ERR, WITHDRAW_READ_SUCCESS, APPROVE_BEGIN, APPROVE_ERR, APPROVE_SUCCESS } = actions;
+const {PROJECT_READ_BEGIN, PROJECT_READ_ERR,PROJECT_READ_SUCCESS, COMMANDS_READ_BEGIN, COMMANDS_READ_SUCCESS, COMMANDS_READ_ERR, WITHDRAWCOMMAND_READ_BEGIN, WITHDRAWCOMMAND_READ_ERR, WITHDRAWCOMMAND_READ_SUCCESS, WITHDRAW_READ_BEGIN, WITHDRAW_READ_ERR, WITHDRAW_READ_SUCCESS, APPROVE_BEGIN, APPROVE_ERR, APPROVE_SUCCESS } = actions;
 
 const initialState = {
   commands: [], // Thay `events` bằng key tương ứng với trạng thái bạn muốn lưu trữ dữ liệu
@@ -101,4 +101,37 @@ const withReducer = (state = initialStateWith, action) => {
 };
 
 
-export {  commandsReducer, withReducer  };
+const initialStatepj = {
+  pjs: [], // Thay `events` bằng key tương ứng với trạng thái bạn muốn lưu trữ dữ liệu
+  loading: false,
+  error: null,
+};
+
+const pjReducer = (state = initialStatepj, action) => {
+  const { type, data, err } = action;
+  switch (type) {
+    case PROJECT_READ_BEGIN:
+      return {
+        ...state,
+        loading: true,
+      };
+    case PROJECT_READ_SUCCESS:
+      return {
+        ...state,
+        pjs: data,
+        loading: false,
+      };
+    case PROJECT_READ_ERR:
+      return {
+        ...state,
+        error: err,
+        loading: false,
+      };
+
+    
+
+    default:
+      return state;
+  }
+};
+export {  commandsReducer, withReducer, pjReducer  };

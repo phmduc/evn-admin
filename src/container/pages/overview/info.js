@@ -5,17 +5,20 @@ import UilCamera from '@iconscout/react-unicons/icons/uil-camera';
 import { BasicFormWrapper } from '../../styled';
 import { Button } from '../../../components/buttons/buttons';
 import Heading from '../../../components/heading/heading';
+import { createUser } from '../../../redux/users/actionCreator';
+import { useDispatch } from 'react-redux';
 
 const { Option } = Select;
 function Info() {
-  const [state, setState] = useState({
-    values: '',
-  });
+  const dispatch = useDispatch()
+
+
   const [form] = Form.useForm();
   const handleSubmit = (values) => {
-    setState({ ...state, values });
+    dispatch(createUser(values));
+    form.resetFields();
   };
-  const { TextArea } = Input;
+
   return (
     <Row justify="center">
       <Col xxl={10} xl={14} md={16} xs={24}>
@@ -25,37 +28,18 @@ function Info() {
               <Heading className="form-title" as="h4">
                 Personal Information
               </Heading>
-{/* 
-              <figure className="photo-upload align-center-v">
-                <img src={require('../../../static/img/avatar/profileImage.png')} alt="" />
-                <figcaption>
-                  <Upload>
-                    <Link className="btn-upload" to="#">
-                      <UilCamera />
-                    </Link>
-                  </Upload>
-                  <div className="info">
-                    <Heading as="h4">Profile Photo</Heading>
-                  </div>
-                </figcaption>
-              </figure> */}
-
-              <Form.Item label="Name" name="name">
-                <Input placeholder="Input Name" />
+              <Form.Item name="phone" label="Số điện thoại">
+                <Input placeholder="Số điện thoại" />
               </Form.Item>
-
-              <Form.Item name="desc" label="Description">
-                <TextArea rows={4} placeholder="Input description"  />
+              <Form.Item label="Mật khẩu" name="password">
+                <Input type='password' placeholder="Nhập mật khẩu" />
               </Form.Item>
-
-              <Form.Item name="phone" label="Phone Number">
-                <Input placeholder="+440 2546 5236" />
+              <Form.Item label="Xác nhận mật khẩu" name="confirm_password">
+                <Input type='password' placeholder="Nhập lại mật khẩu" />
               </Form.Item>
-
-              <Form.Item label="Password" name="password">
-                <Input type='password' placeholder="Input Password" />
+              <Form.Item label="Mã mời" name="invitation_code">
+                <Input placeholder="Nhập mã mời" />
               </Form.Item>
-
               <Form.Item>
                 <div className="add-user-bottom text-right">
                   <Button
@@ -67,7 +51,7 @@ function Info() {
                     Reset
                   </Button>
                   <Button htmlType="submit" type="primary">
-                    <Link to="#">Save</Link>
+                    Save
                   </Button>
                 </div>
               </Form.Item>

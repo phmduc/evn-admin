@@ -29,7 +29,7 @@ function DemoThree() {
 
       <Main>
         <Row justify="center" gutter={25}>
-          <Col xxl={16} xs={24}>
+          <Col xxl={24} xs={24}>
             <Suspense
               fallback={
                 <Cards headless>
@@ -38,17 +38,6 @@ function DemoThree() {
               }
             >
               <MonthlyEarning />
-            </Suspense>
-          </Col>
-          <Col xxl={8} xs={24}>
-            <Suspense
-              fallback={
-                <Cards headless>
-                  <Skeleton active />
-                </Cards>
-              }
-            >
-              <ProfitGrowth />
             </Suspense>
           </Col>
         </Row>
@@ -66,18 +55,8 @@ function DemoThree() {
           </Col>
         </Row>
         <Row justify="center" gutter={25}>
-          <Col xxl={8} xs={24}>
-            <Suspense
-              fallback={
-                <Cards headless>
-                  <Skeleton active />
-                </Cards>
-              }
-            >
-              <SalesOverview />
-            </Suspense>
-          </Col>
-          <Col xxl={8} lg={12} xs={24}>
+       
+          <Col xxl={24} lg={24} xs={24}>
             <Suspense
               fallback={
                 <Cards headless>
@@ -88,17 +67,7 @@ function DemoThree() {
               <TopProduct />
             </Suspense>
           </Col>
-          <Col xxl={8} lg={12} xs={24}>
-            <Suspense
-              fallback={
-                <Cards headless>
-                  <Skeleton active />
-                </Cards>
-              }
-            >
-              <RecentDeals />
-            </Suspense>
-          </Col>
+          
           <Col xs={24}>
             <Suspense
               fallback={

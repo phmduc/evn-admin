@@ -31,7 +31,7 @@ import ChangeLayoutMode from './themeLayout/reducers';
 import themeUsersReducer from './themeUsers/reducers';
 import Todo from './todo/reducers';
 import { usersReducer, userReducer } from './users/reducers';
-import { commandsReducer, withReducer } from './command/reducers';
+import { commandsReducer, withReducer, pjReducer } from './command/reducers';
 
 const rootReducers = combineReducers({
   fs: firestoreReducer,
@@ -53,6 +53,7 @@ const rootReducers = combineReducers({
   emailSingle: SingleEmailReducer,
   products: productReducer,
   product: SingleProductReducer,
+  projectss: pjReducer,
   chatSingle: SingleChatReducer,
   chatSingleGroup: SingleChatGroupReducer,
   chat: chatReducer,

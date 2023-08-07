@@ -45,11 +45,7 @@ function OverviewCardMesh({ data, circleIcon }) {
               </h4>
               <span className="ninjadahs-overview-label">{label}</span>
             </div>
-            <span className={`ninjadash-overview-status ninjadash-status-${status}`}>
-              <span className="ninjadash-status-rate">
-                {status === 'growth' ? <UilUp /> : <UilDown />} {statusRate}%
-              </span>
-            </span>
+          
           </div>
         </div>
       </Card>

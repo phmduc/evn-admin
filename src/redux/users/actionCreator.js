@@ -1,14 +1,15 @@
 import actions from "./actions";
 import { DataService } from "../../config/dataService/dataService";
+import { toast } from "react-toastify";
 
 
-const { usersGetBegin, usersGetErr, usersGetSucess, userGetBegin, userGetErr, userGetSucess, userUpdateBegin, userUpdateSucess, userUpdateErr } = actions
+const { usersGetBegin, usersGetErr, usersGetSucess, userGetBegin, userGetErr, userGetSucess, userUpdateBegin, userUpdateSucess, userUpdateErr, createBegin, createErr, createSucess } = actions
 
 const getUsersData = ()=>{
     return async(dispatch) => {
         dispatch(usersGetBegin());
         try{
-            const data = await DataService.get('/wp-json/wp/v2/users')
+            const data = await DataService.get('/wp-json/dbevn/v1/users/all')
             dispatch(usersGetSucess(data.data))
         }catch(err){
             dispatch(usersGetErr(err))
@@ -24,6 +25,19 @@ const getUserData = (id)=>{
             dispatch(userGetSucess(data.data))
         }catch(err){
             dispatch(userGetErr(err))
+        }
+    }
+}
+
+const createUser = (value)=>{
+    return async(dispatch) => {
+        dispatch(createBegin());
+        try{
+            const data = await DataService.post(`/wp-json/dbevn/v1/reg`, value)
+            dispatch(createSucess(data.data))
+            toast.success(data.data.message)
+        }catch(err){
+            toast.error(err.response.data.message)
         }
     }
 }
@@ -81,4 +95,4 @@ const updateUserData = (id, values)=>{
 }
 
 
-export {getUsersData, getUserData, updateUserData}
+export {getUsersData, getUserData, updateUserData, createUser}

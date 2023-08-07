@@ -1650,6 +1650,9 @@ html[dir="rtl"] .ninjadash-upload-basic .ninjadash-upload-browse {
 .table-responsive .ant-table-content .ant-table-cell:nth-child(2) {
   width: 45%;
 }
+.table-responsive.userjs .ant-table-content .ant-table-cell:nth-child(2) {
+  width: 20%;
+}
 .ant-table-tbody p{
   margin-bottom: 0;
 }

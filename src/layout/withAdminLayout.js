@@ -124,9 +124,7 @@ const ThemeLayout = (WrappedComponent) => {
                     >
                       <img
                         src={
-                          layoutMode === 'lightMode'
-                            ? require(`../static/img/logo_dark.svg`).default
-                            : require(`../static/img/logo_white.svg`).default
+                          require(`../static/img/evnlogo.webp`)
                         }
                         alt=""
                       />

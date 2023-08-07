@@ -44,7 +44,6 @@ function User(){
 
     const handleSubmitUpdate = (id)=>{
         const values= {
-            phone: phoneUser,
             refcode: code,
             bank_name: bank,
             bank_account: account,
@@ -96,12 +95,9 @@ function User(){
                                 <BasicFormWrapper>
                                     <Form form={form} >
                                         {console.log(user)}
-                                        <Form.Item label="Tên" name="name" initialValue={(users.length < 0) ? 'hihi' : users.find((obj) => obj.id == params.id).name}>
-                                            <Input disabled placeholder="Nhập tên"  />
-                                        </Form.Item>
 
                                         <Form.Item name="phone" label="Số điện thoại" >
-                                            <Input  placeholder="Nhập số điện thoại" defaultValue={phone} onChange={(e)=>{setPhoneUser(e.target.value)}}  />
+                                            <Input  placeholder="Nhập số điện thoại" disabled defaultValue={phone} onChange={(e)=>{setPhoneUser(e.target.value)}}  />
                                         </Form.Item>
 
                                         <Form.Item name="refcode" label="Mã giới thiệu" initialValue={refcode}>

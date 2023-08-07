@@ -1,6 +1,6 @@
 import actions from "./actions";
 
-const {USERS_GET_BEGIN, USERS_GET_SUCESS, USERS_GET_ERR, USER_GET_BEGIN, USER_GET_ERR, USER_GET_SUCESS, USER_UPDATE_BEGIN, USER_UPDATE_ERR, USER_UPDATE_SUCESS} = actions
+const {CREATE_BEGIN, CREATE_SUCESS, CREATE_ERR,USERS_GET_BEGIN, USERS_GET_SUCESS, USERS_GET_ERR, USER_GET_BEGIN, USER_GET_ERR, USER_GET_SUCESS, USER_UPDATE_BEGIN, USER_UPDATE_ERR, USER_UPDATE_SUCESS} = actions
 
 const initialState = {
   data: [],
@@ -77,6 +77,22 @@ const userReducer = (state = initialStateSingle, action)=>{
         err,
         loading: fale,
       }
+      case CREATE_BEGIN:
+        return{
+          ...state,
+          loading: true,
+        }
+      case CREATE_SUCESS:
+      return{
+        ...state,
+        loading: false,
+      }
+      case CREATE_ERR:
+        return{
+          ...state,
+          err,
+          loading: fale,
+        }
     default:
       return state;
   }

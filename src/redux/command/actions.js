@@ -12,6 +12,11 @@ const actions = {
   WITHDRAWCOMMAND_READ_SUCCESS: 'WITHDRAWCOMMAND_READ_SUCCESS',
   WITHDRAWCOMMAND_READ_ERR: 'WITHDRAWCOMMAND_READ_ERR',
 
+    
+  PROJECT_READ_BEGIN: 'PROJECT_READ_BEGIN',
+  PROJECT_READ_SUCCESS: 'PROJECT_READ_SUCCESS',
+  PROJECT_READ_ERR: 'PROJECT_READ_ERR',
+
 
   APPROVE_BEGIN: 'APPROVE_BEGIN',
   APPROVE_SUCCESS: 'APPROVE_SUCCESS',
@@ -79,6 +84,25 @@ const actions = {
     };
   },
 
+  projectsReadBegin: () => {
+    return {
+      type: actions.PROJECT_READ_BEGIN,
+    };
+  },
+
+  projectsReadSuccess: (data) => {
+    return {
+      type: actions.PROJECT_READ_SUCCESS,
+      data,
+    };
+  },
+
+  projectsReadErr: (err) => {
+    return {
+      type: actions.PROJECT_READ_ERR,
+      err,
+    };
+  },
 
 
   approveBegin: () => {

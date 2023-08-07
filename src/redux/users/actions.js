@@ -11,6 +11,10 @@ const actions = {
     USER_UPDATE_SUCESS: "USER_UPDATE_SUCESS",
     USER_UPDATE_ERR: "USER_UPDATE_ERR",
 
+    CREATE_BEGIN: "CREATE_BEGIN",
+    CREATE_SUCESS: "CREATE_SUCESS",
+    CREATE_ERR: "CREATE_ERR",
+
     usersGetBegin: () =>{
         return {
             type: actions.USERS_GET_BEGIN,
@@ -67,6 +71,25 @@ const actions = {
     userUpdateErr: (err) =>{
         return {
             type: actions.USER_UPDATE_ERR,
+            err
+        }
+    },
+
+    createBegin: () =>{
+        return {
+            type: actions.CREATE_BEGIN,
+        }
+    },
+
+    createSucess: (data) =>{
+        return {
+            type: actions.CREATE_SUCESS,
+            data
+        }
+    },
+    createErr: (err) =>{
+        return {
+            type: actions.CREATE_ERR,
             err
         }
     }

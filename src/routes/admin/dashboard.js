@@ -15,13 +15,7 @@ function DashboardRoutes() {
   return (
     <Routes>
       <Route index element={<Dashboard />} />
-      <Route path="demo-2" element={<DemoTwo />} />
       <Route path="demo-3" element={<DemoThree />} />
-      <Route path="demo-4" element={<DemoFour />} />
-      <Route path="demo-6" element={<DemoSix />} />
-      <Route path="demo-7" element={<DemoSeven />} />
-      <Route path="demo-8" element={<DemoEight />} />
-      <Route path="demo-9" element={<DemoNine />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

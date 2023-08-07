@@ -78,7 +78,9 @@ function BlogDetails() {
                     if(updateExcerpt) {
                       values.excerpt = updateExcerpt
                     }
-                 
+                    if(updateCategories){
+                      values.categories = updateCategories
+                    }
                     dispatch(blogsUpdateData(id, values, ()=>{window.location.reload()} ))
                 }}>
                 <UilEditAlt />
@@ -105,6 +107,7 @@ function BlogDetails() {
                   </Radio.Group>
                 </Cards>
               </div>
+           
               <div className="about-project-wrapper" style={{minHeight: "unset"}}>
                 <Cards title="Tiêu đề">
                   <Input placeholder="Input title" defaultValue={titleRender} onChange={(e)=>{setUpdateTitle(e.target.value)}} />

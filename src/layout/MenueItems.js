@@ -99,123 +99,26 @@ function MenuItems({ toggleCollapsed }) {
   };
 
   const items = [
-    getItem(t('dashboard'), 'dashboard', !topMenu && <UilCreateDashboard />, [
-      getItem(
-        <NavLink onClick={toggleCollapsed} to={`${path}`}>
-          {t('demo')} {t('1')}
-        </NavLink>,
-        'demo-1',
-        null,
-      ),
-      getItem(
-        <NavLink onClick={toggleCollapsed} to={`${path}/demo-2`}>
-          {t('demo')} {t('2')}
-        </NavLink>,
-        'demo-2',
-        null,
-      ),
-      getItem(
-        <NavLink onClick={toggleCollapsed} to={`${path}/demo-3`}>
-          {t('demo')} {t('3')}
-        </NavLink>,
-        'demo-3',
-        null,
-      ),
-      getItem(
-        <NavLink onClick={toggleCollapsed} to={`${path}/demo-4`}>
-          {t('demo')} {t('4')}
-        </NavLink>,
-        'demo-4',
-        null,
-      ),
-      getItem(
-        <NavLink onClick={toggleCollapsed} to={`${path}/demo-5`}>
-          {t('demo')} {t('5')}
-        </NavLink>,
-        'demo-5',
-        null,
-      ),
-      getItem(
-        <NavLink onClick={toggleCollapsed} to={`${path}/demo-6`}>
-          {t('demo')} {t('6')}
-        </NavLink>,
-        'demo-6',
-        null,
-      ),
-      getItem(
-        <NavLink onClick={toggleCollapsed} to={`${path}/demo-7`}>
-          {t('demo')} {t('7')}
-        </NavLink>,
-        'demo-7',
-        null,
-      ),
-      getItem(
-        <NavLink onClick={toggleCollapsed} to={`${path}/demo-8`}>
-          {t('demo')} {t('8')}
-        </NavLink>,
-        'demo-8',
-        null,
-      ),
-      getItem(
-        <NavLink onClick={toggleCollapsed} to={`${path}/demo-9`}>
-          {t('demo')} {t('9')}
-        </NavLink>,
-        'demo-9',
-        null,
-      ),
-      getItem(
-        <NavLink onClick={toggleCollapsed} to={`${path}/demo-10`}>
-          {t('demo')} {t('10')}
-        </NavLink>,
-        'demo-10',
-        null,
-      ),
-    ]),
-    getItem(t('layouts'), 'layout', !topMenu && <UilWindowSection />, [
-      getItem(
-        <NavLink
-          onClick={() => {
-            toggleCollapsed();
-            darkmodeDiactivated();
-            changeLayout('lightMode');
-          }}
-          to="#"
-        >
-          {t('light')} {t('mode')}
-        </NavLink>,
-        'light',
-        null,
-      ),
-      getItem(
-        <NavLink
-          onClick={() => {
-            toggleCollapsed();
-            darkmodeActivated();
-            changeLayout('darkMode');
-          }}
-          to="#"
-        >
-          {t('dark')} {t('mode')}
-        </NavLink>,
-        'dark',
-        null,
-      ),
-    ]),
- 
+
     getItem(
-      !topMenu && <NavTitle className="ninjadash-sidebar-nav-title">{t('application')}</NavTitle>,
-      'app-title',
-      null,
-      null,
-      'group',
+      <NavLink onClick={toggleCollapsed} to={`${path}/demo-3`}>
+        {t('Dashboard')}
+      </NavLink>,
+      'dashboard',
+      !topMenu && (
+        <NavLink className="menuItem-iocn" to={`${path}/demo-3`}>
+          <UilCreateDashboard />
+        </NavLink>
+      ),
     ),
    
-    getItem(t('Blogs'), 'blogs', !topMenu && <UilEnvelope />, [
+   
+    getItem(t('Tin tức'), 'blogs', !topMenu && <UilEnvelope />, [
       getItem(
         <NavLink onClick={toggleCollapsed} to={`${path}/blogs/view`}>
-          {t('Danh sách bài viết')}
+          {t('Danh sách tin tức')}
         </NavLink>,
-        'Danh sách bài viết',
+        'Danh sách tin tức',
         null,
       ),
       getItem(
@@ -225,53 +128,69 @@ function MenuItems({ toggleCollapsed }) {
         'Thêm mới',
         null,
       ),
+    ]),
+    
+    getItem(t('Thông báo nền tảng'), 'notifys', !topMenu && <UilEnvelope />, [
       getItem(
-        <NavLink onClick={toggleCollapsed} to={`${path}/blogs/view/category`}>
-          {t('Danh mục')}
+        <NavLink onClick={toggleCollapsed} to={`${path}/blogs/notifications/view`}>
+          {t('Danh sách bài viết')}
         </NavLink>,
-        'Danh mục',
+        'Danh sách bài viết',
+        null,
+      ),
+      getItem(
+        <NavLink onClick={toggleCollapsed} to={`${path}/blogs/notifications/create/`}>
+          {t('Thêm mới')}
+        </NavLink>,
+        'Thêm mới Thông Báo',
         null,
       ),
     ]),
-    // getItem(
-    //   <NavLink onClick={toggleCollapsed} to={`${path}/main/chat/private/rofiq@gmail.com`}>
-    //     {t('chat')}
-    //   </NavLink>,
-    //   'chat',
-    //   !topMenu && (
-    //     <NavLink className="menuItem-iocn" to={`${path}/main/chat/private/rofiq@gmail.com`}>
-    //       <UilChat />
-    //     </NavLink>
-    //   ),
-    // ),
-    getItem(t('Lệnh'), 'project', !topMenu && <UilBagAlt />, [
-      getItem(
-        <NavLink onClick={toggleCollapsed} to={`${path}/project/view`}>
-          {t('Danh sách lệnh giao dịch')}
-        </NavLink>,
-        'projectList',
-        null,
+    getItem(
+      <NavLink onClick={toggleCollapsed} to={`${path}/project/view`}>
+        {t('Lệnh giao dịch')}
+      </NavLink>,
+      'projectList',
+      !topMenu && (
+        <NavLink className="menuItem-iocn" to={`${path}/demo-3`}>
+          <UilBagAlt />
+        </NavLink>
       ),
-      getItem(
-        <NavLink onClick={toggleCollapsed} to={`${path}/project/view/withdraw`}>
-          {t('Danh sách lệnh rút')}
-        </NavLink>,
-        'projectListWidthdraw',
-        null,
+      
+    ),
+    getItem(
+      <NavLink onClick={toggleCollapsed} to={`${path}/project/view/withdraw`}>
+        {t('Lệnh rút tiền')}
+      </NavLink>,
+      'projectListWidthdraw',
+      !topMenu && (
+        <NavLink className="menuItem-iocn" to={`${path}/demo-3`}>
+          <UilBagAlt />
+        </NavLink>
       ),
-    ]),
-
-    getItem(t('users'), 'users', !topMenu && <UilUsersAlt />, [
+    ),
+    getItem(
+      <NavLink onClick={toggleCollapsed} to={`${path}/command/view`}>
+        {t('Danh sách dự án')}
+      </NavLink>,
+      'dứ án',
+      !topMenu && (
+        <NavLink className="menuItem-iocn" to={`${path}/demo-3`}>
+          <UilBagAlt />
+        </NavLink>
+      ),
+    ),
+    getItem(t('Người dùng'), 'users', !topMenu && <UilUsersAlt />, [
       getItem(
         <NavLink onClick={toggleCollapsed} to={`${path}/users/add-user/info`}>
-          {t('add')} {t('user')}
+          {t('Thêm người dùng')}
         </NavLink>,
         'addUser',
         null,
       ),
       getItem(
         <NavLink onClick={toggleCollapsed} to={`${path}/users/dataTable`}>
-          {t('List')} {t('User')}
+          {t('Quản lý người dùng')} 
         </NavLink>,
         'user-dataTable',
         null,
@@ -280,13 +199,6 @@ function MenuItems({ toggleCollapsed }) {
  
   
    
-    getItem(
-      !topMenu && <NavTitle className="ninjadash-sidebar-nav-title">{t('Pages')}</NavTitle>,
-      'page-title',
-      null,
-      null,
-      'group',
-    ),
     getItem(
       <NavLink onClick={toggleCollapsed} to={`${path}/pages/settings`}>
         {t('settings')}
@@ -300,18 +212,7 @@ function MenuItems({ toggleCollapsed }) {
     ),
 
  
-    getItem(
-      <NavLink onClick={toggleCollapsed} to={`${path}/pages/banners`}>
-        {t('banners')}
-      </NavLink>,
-      'banners',
-      !topMenu && (
-        <NavLink className="menuItem-iocn" to={`${path}/pages/banners`}>
-          <UilPresentation />
-        </NavLink>
-      ),
-    ),
-  
+ 
    
   
   ];
