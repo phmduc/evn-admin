@@ -14,12 +14,7 @@ import { categoriesGetData } from '../../../redux/blogs/actionCreator';
 function BlogsLists() {
   const dispatch = useDispatch();
   const blog = useSelector((state) => state.blogs.blogs);
-  const [state, setState] = useState({
-    blogs: blog,
-    current: 0,
-    pageSize: 0,
-  });
-  const { blogs } = state;
+ 
   const { category } = useSelector((state) => ({
     category: state.category.category,
  
@@ -36,11 +31,6 @@ function BlogsLists() {
 
   useEffect(() => {
     dispatch(categoriesGetData())
-    if (blog) {
-      setState({
-        blogs: blog,
-      });
-    }
   }, [blog]);
 
   const onShowSizeChange = (current, pageSize) => {
@@ -142,7 +132,7 @@ function BlogsLists() {
       </Col>
       <Col xs={24} className="pb-30">
         <ProjectPagination>
-          {blogs.length ? (
+          {blog.length ? (
             <Pagination
               onChange={onHandleChange}
               showSizeChanger
