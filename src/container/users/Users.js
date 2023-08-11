@@ -38,6 +38,7 @@ function Users() {
     setSearch(searchText)
 };
 
+console.log(users)
 
   const searchResult = users.filter(elem=>{
     return elem.usermeta.phone.includes(search) 
@@ -50,7 +51,7 @@ function Users() {
 
     let usersTableData= []
     users.map((user) => {
-    const { user_id,usermeta:{phone, ref_code, rank, wallet, wallet_can_cash,  wallet_buyed, wallet_cashed, verify } } = user;
+    const { user_id,usermeta:{phone, ref_code, rank, wallet, wallet_can_cash,  wallet_buyed, wallet_cashed, verify, status } } = user;
     return usersTableData.push({
       key: user_id,
       user: (
@@ -88,14 +89,23 @@ function Users() {
           </Heading>
         </figcaption>
       </div>,
+      
+      verify: 
+      <div className="user-info">
+        <figcaption>
+          <Heading className="user-name" as="h6">
+              {verify ? verify : 'Chưa xác minh'} 
+          </Heading>
+        </figcaption>
+      </div>,
       status: 
       <div className="user-info">
-      <figcaption>
-        <Heading className="user-name" as="h6">
-            {verify ? verify : 'Chưa xác minh'} 
-        </Heading>
-      </figcaption>
-    </div>,
+        <figcaption>
+          <Heading className="user-name" as="h6">
+              {status == 'active' ? 'Đang hoạt động' : 'Đã khoá'} 
+          </Heading>
+        </figcaption>
+      </div>,
       action: (
         <div className="table-actions">
           <Link className="btn-icon" type="info" to={`/admin/user/${user_id}`} shape="circle">
@@ -134,6 +144,11 @@ function Users() {
       title: 'Trạng thái',
       dataIndex: 'status',
       key: 'status',
+    },
+    {
+      title: 'Xác minh tên thật',
+      dataIndex: 'verify',
+      key: 'verify',
     },
     {
       title: 'Actions',

@@ -13,6 +13,7 @@ import { filterProjectByStatus, sortingProjectByCategory } from '../../redux/pro
 import { Main } from '../styled';
 import { PageHeader } from '../../components/page-headers/page-headers';
 import Withdraw from './overview/withdraw';
+import Deposit from './overview/deposit';
 
 const List = lazy(() => import('./overview/List'));
 
@@ -59,6 +60,8 @@ function Project() {
                 <Routes>
                   <Route index element={<List search={search} />} />
                   <Route path='/withdraw/*' element={<Withdraw search={search} />} />
+                  <Route path='/deposit/*' element={<Deposit search={search} />} />
+
 
                 </Routes>
               </Suspense>

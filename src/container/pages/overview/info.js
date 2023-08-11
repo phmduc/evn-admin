@@ -23,6 +23,7 @@ function Info() {
     <Row justify="center">
       <Col xxl={10} xl={14} md={16} xs={24}>
         <div className="user-info-form">
+          
           <BasicFormWrapper>
             <Form style={{ width: '100%' }} form={form} name="info" onFinish={handleSubmit}>
               <Heading className="form-title" as="h4">

@@ -158,17 +158,38 @@ function MenuItems({ toggleCollapsed }) {
       ),
       
     ),
-    getItem(
-      <NavLink onClick={toggleCollapsed} to={`${path}/project/view/withdraw`}>
-        {t('Lệnh rút tiền')}
-      </NavLink>,
-      'projectListWidthdraw',
-      !topMenu && (
-        <NavLink className="menuItem-iocn" to={`${path}/demo-3`}>
-          <UilBagAlt />
-        </NavLink>
+    getItem(t('Rút tiền'), 'icons', !topMenu && <UilIcons />, [
+      getItem(
+        <NavLink onClick={toggleCollapsed} to={`${path}/project/view/withdraw`}>
+          {t('Danh sách lệnh rút')}
+        </NavLink>,
+      'lệnh rút',
       ),
-    ),
+      getItem(
+        <NavLink onClick={toggleCollapsed} to={`${path}/project/create`}>
+          {t('Tạo lệnh rút')}
+        </NavLink>,
+      'tạo rút',
+
+      ),
+    ]),
+    
+    getItem(t('Nạp tiền'), 'iconss', !topMenu && <UilIcons />, [
+      getItem(
+        <NavLink onClick={toggleCollapsed} to={`${path}/project/view/deposit`}>
+          {t('Danh sách lệnh nạp')}
+        </NavLink>,
+      'lệnh nạp',
+
+      ),
+      getItem(
+        <NavLink onClick={toggleCollapsed} to={`${path}/project/deposit/create`}>
+          {t('Tạo lệnh nạp')}
+        </NavLink>,
+      'tạo nạp',
+
+      ),
+    ]),
     getItem(
       <NavLink onClick={toggleCollapsed} to={`${path}/command/view`}>
         {t('Danh sách dự án')}
@@ -182,19 +203,20 @@ function MenuItems({ toggleCollapsed }) {
     ),
     getItem(t('Người dùng'), 'users', !topMenu && <UilUsersAlt />, [
       getItem(
+        <NavLink onClick={toggleCollapsed} to={`${path}/users/dataTable`}>
+          {t('Danh sách người dùng')} 
+        </NavLink>,
+        'user-dataTable',
+        null,
+      ),
+      getItem(
         <NavLink onClick={toggleCollapsed} to={`${path}/users/add-user/info`}>
           {t('Thêm người dùng')}
         </NavLink>,
         'addUser',
         null,
       ),
-      getItem(
-        <NavLink onClick={toggleCollapsed} to={`${path}/users/dataTable`}>
-          {t('Quản lý người dùng')} 
-        </NavLink>,
-        'user-dataTable',
-        null,
-      ),
+     
     ]),
  
   

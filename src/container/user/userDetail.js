@@ -30,30 +30,22 @@ function User(){
     const [rankUser, setrankUser] = useState('')
     const [canCash, setCanCash] = useState('')
     const [verifyUser, setverifyUser] = useState(false)
+    const [statusUser, setstatusUser] = useState(false)
+
     const [input, setInput] = useState(false)
     const [withdraw, setWithDraw] = useState(0)
 
-
-    const handleWithdraw =(id, value)=>{
-        const data={
-            user_id: id,
-            value,
-        }
-        dispatch(withdrawCommand(data))
-    }
+    console.log(verifyUser)
 
     const handleSubmitUpdate = (id)=>{
         const values= {
             refcode: code,
             bank_name: bank,
             bank_account: account,
-            wallet_deposited: input,
             wallet_cashed: cashed,
-            rank: rankUser,
-            wallet_can_cash: canCash,
-        }
-        if(verifyUser){
-            values.verify = 'Đã xác minh'
+            verify: verifyUser,
+            status: statusUser
+
         }
         dispatch(updateUserData(id, values))
     }
@@ -63,7 +55,7 @@ function User(){
         dispatch(getUserData(parseInt(params.id, 10)))
     }, [params.id, dispatch, user.phone]);
   if(user != undefined && users.length > 0 ){
-    const { bank_account, bank_name, cccd_back, cccd_front, phone, rank, refcode, verify, wallet, wallet_buyed, wallet_can_cash, wallet_cashed, wallet_deposited, wallet_win  } = user;
+    const { bank_account, bank_name, cccd_back, cccd_front, phone, rank,status, refcode, verify, wallet, wallet_buyed, wallet_can_cash, wallet_cashed, wallet_deposited, wallet_win  } = user;
     return (
         <CardToolbox>
             <UserCarrdTop>
@@ -103,8 +95,8 @@ function User(){
                                         <Form.Item name="refcode" label="Mã giới thiệu" initialValue={refcode}>
                                             <Input placeholder="Nhập mã giới thiệu" value={code} onChange={(e)=>{setCode(e.target.value)}}/>
                                         </Form.Item>
-                                        <Form.Item name="rank" label="Bậc tài khoản" initialValue={rank ? rank : 'VIP 0'}>
-                                            <Radio.Group  onChange={(e)=>{setrankUser(e.target.value)}} >
+                                        <Form.Item name="rank" label="Hạng thành viên" initialValue={rank ? rank : 'VIP 0'}>
+                                            <Radio.Group disabled  onChange={(e)=>{setrankUser(e.target.value)}} >
                                                 <Radio value={'VIP 0'}>VIP 0</Radio>
                                                 <Radio value={'VIP 1'}>VIP 1</Radio>
                                                 <Radio value={'VIP 2'}>VIP 2</Radio>
@@ -297,9 +289,7 @@ function User(){
                                         <Form.Item name="account" label="Số tài khoản ngân hàng" initialValue={bank_account}>
                                             <Input placeholder="Nhập số tài khoản ngân hàng" value={account} onChange={(e)=>{setAccount(e.target.value)}}/>
                                         </Form.Item>
-                                        <Form.Item name="wallet_input" label="Nạp tiền vào" >
-                                            <Input placeholder="Nhập số tiền nạp"  onChange={(e)=>{setInput(e.target.value)}} />
-                                        </Form.Item>
+                                    
                                         <Form.Item name="wallet" label="Tổng tài sản" initialValue={wallet}>
                                             <Input placeholder="Nhập tổng tài sản" disabled/>
                                         </Form.Item>
@@ -312,29 +302,21 @@ function User(){
                                         <Form.Item name="wallet_win" label="Thu nhập kiếm được" initialValue={wallet_win}>
                                             <Input placeholder="Nhập số thu nhập kiếm được" disabled />
                                         </Form.Item>
-                                        <Form.Item name="wallet_can_cash" label="Số tiền có thể rút" initialValue={wallet_can_cash}>
-                                            <Input placeholder="Nhập số tiền có thể rút" value={canCash} onChange={(e)=>{setCanCash(e.target.value)}} />
+                                        <Form.Item name="wallet_can_cash"  label="Số tiền có thể rút" initialValue={wallet_can_cash}>
+                                            <Input disabled placeholder="Nhập số tiền có thể rút" value={canCash} onChange={(e)=>{setCanCash(e.target.value)}} />
                                         </Form.Item>
-                                      
-                                        <div className="withdraw">
-                                            <Form.Item name="withdraw" label="Rút tiền" >
-                                                <Input placeholder="Nhập số tiền rút" value={withdraw} onChange={(e)=>{setWithDraw(e.target.value)}} />
-                                                <Button
-                                                    htmlType="submit" type="primary"
-                                                    onClick={()=>{
-                                                        handleWithdraw(params.id, withdraw)
-                                                    }}
-                                                >
-                                                    Rút tiền
-                                                </Button>
-                                            </Form.Item>
-                                           
-                                        </div>
-                                        <Form.Item name="verify" label="Xác minh tài khoản" >
-                                                <Checkbox defaultChecked={verify} onChange={(e) => {
-                                                setverifyUser(e.target.checked)
-                                                }}>Đã xác minh</Checkbox>
-                                            </Form.Item>
+                                        <Form.Item name="verify" label="Xác minh tài khoản" initialValue={verify == 'Đã xác minh' ? 'Đã xác minh' : 'Chưa xác minh'}>
+                                            <Radio.Group  onChange={(e)=>{setverifyUser(e.target.value)}} >
+                                                <Radio value={'Đã xác minh'}>Đã xác minh</Radio>
+                                                <Radio value={'Chưa xác minh'}>Chưa xác minh</Radio>
+                                            </Radio.Group>
+                                        </Form.Item>
+                                        <Form.Item name="status" label="Trạng thái hoạt động" initialValue={status}>
+                                            <Radio.Group  onChange={(e)=>{setstatusUser(e.target.value)}} >
+                                                <Radio value={'active'}>Hoạt động</Radio>
+                                                <Radio value={'inactive'}>Khoá tài khoản</Radio>
+                                            </Radio.Group>
+                                        </Form.Item>
                                         <Form.Item>
                                             <div className="add-user-bottom text-right">
                                             <Button

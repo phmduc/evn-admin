@@ -13,11 +13,11 @@ import { BasicFormWrapper } from '../styled';
  import { Cards } from '../../components/cards/frame/cards-frame';
  import { useEffect, useState } from 'react';
  import { getUsersData } from '../../redux/users/actionCreator';
- import { withdrawCommand } from '../../redux/command/actionCreator';
+ import { depositCommand } from '../../redux/command/actionCreator';
 const Grid = lazy(() => import('./overview/Grid'));
 const List = lazy(() => import('./overview/List'));
 
-function Project() {
+function ProjectDep() {
   const dispatch = useDispatch();
   const searchData = useSelector((state) => state.headerSearchData);
   const [form] = Form.useForm();
@@ -46,7 +46,7 @@ function Project() {
       user_id: id,
       value: money,
     }
-    dispatch(withdrawCommand(data))
+    dispatch(depositCommand(data))
     }
   }
   useEffect(()=>{
@@ -101,8 +101,8 @@ function Project() {
                                options={sorted ? sorted : []}
                           />
                        </Form.Item>
-                      <Form.Item name="money" label="Nhập số tiền rút">
-                        <Input placeholder="Số tiền rút" value={money} onChange={(e)=>{setMoney(e.target.value)}} />
+                      <Form.Item name="money" label="Nhập số tiền nạp">
+                        <Input placeholder="Số tiền nạp" value={money} onChange={(e)=>{setMoney(e.target.value)}} />
                       </Form.Item>
                       <Button style={{'float': 'right'}} htmlType="submit" type="primary">
                         Save
@@ -120,4 +120,4 @@ function Project() {
   );
 }
 
-export default Project;
+export default ProjectDep;

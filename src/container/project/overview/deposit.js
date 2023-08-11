@@ -7,26 +7,26 @@ import Heading from '../../../components/heading/heading';
 import { Cards } from '../../../components/cards/frame/cards-frame';
 import { ProjectPagination, ProjectListTitle, ProjectListAssignees, ProjectList } from '../style';
 import { Dropdown } from '../../../components/dropdown/dropdown';
-import { withdrawGetData, approveGetData } from '../../../redux/command/actionCreator'
+import { depositGetData, approveDepGetData } from '../../../redux/command/actionCreator'
 import { useDispatch } from 'react-redux';
 import { getUsersData } from '../../../redux/users/actionCreator';
 import './list.css'
 import { toast } from 'react-toastify';
 
 
-function Withdraw(props) {
-  let withs = useSelector((state) => state.withs.withs)
+function Deposit(props) {
+  let deps = useSelector((state) => state.deps.deps)
   
-  console.log(withs)
+  console.log(deps)
   const dispatch = useDispatch()
 
-  const searchResult = (withs.filter(elem=>{
+  const searchResult = (deps.filter(elem=>{
     console.log(elem)
     return elem.user_phone.includes(props.search) || elem.value.includes(props.search)
   }))
 
   if(searchResult){
-    withs = searchResult
+    deps = searchResult
   }
 
   const handleApprove = (id, user_id, status)=>{
@@ -35,17 +35,17 @@ function Withdraw(props) {
         status: status,
         user_id: user_id
     }
-    dispatch(approveGetData(data))
+    dispatch(approveDepGetData(data))
   }
 
   useEffect(() => {
-    dispatch(withdrawGetData())
+    dispatch(depositGetData())
     dispatch(getUsersData());
   }, [dispatch]);
 
   const dataSource = [];
-  if (withs.length)
-    withs.map((values, index) => {
+  if (deps.length)
+    deps.map((values, index) => {
       const { id, created, status, user_id, user_phone, value } = values;
       return dataSource.push({
         key: id,
@@ -88,12 +88,12 @@ function Withdraw(props) {
       key: 'stt',
     },
     {
-      title: 'Ngày rút',
+      title: 'Ngày nạp',
       dataIndex: 'startDate',
       key: 'startDate',
     },
     {
-      title: 'Người rút',
+      title: 'Người nạp',
       dataIndex: 'person',
       key: 'person',
     },
@@ -103,7 +103,7 @@ function Withdraw(props) {
       key: 'status',
     },
     {
-      title: 'Số tiền rút',
+      title: 'Số tiền nạp',
       dataIndex: 'value',
       key: 'value',
     },
@@ -130,4 +130,4 @@ function Withdraw(props) {
   );
 }
 
-export default Withdraw;
+export default Deposit;

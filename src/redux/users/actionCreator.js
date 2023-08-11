@@ -84,6 +84,11 @@ const updateUserData = (id, values)=>{
             if(values.verify){
                 promises.push(DataService.put(`/wp-json/dbevn/v1/users/${id}/verify`,{},{verify: values.verify})) 
             } 
+            if(values.status == 'active'){
+                promises.push(DataService.post(`/wp-json/dbevn/v1/unlock/user-${id}`) )
+            } else  if(values.status == 'inactive'){
+                promises.push(DataService.post(`/wp-json/dbevn/v1/lock/user-${id}`) )
+            } 
             try {
                 const responses = await Promise.all(promises);
                 const data = await Promise.all(responses.map(response => response.data));

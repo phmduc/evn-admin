@@ -22,6 +22,18 @@ const actions = {
   APPROVE_SUCCESS: 'APPROVE_SUCCESS',
   APPROVE_ERR: 'APPROVE_ERR',
 
+  DEPOSIT_READ_BEGIN: 'DEPOSIT_READ_BEGIN',
+  DEPOSIT_READ_SUCCESS: 'DEPOSIT_READ_SUCCESS',
+  DEPOSIT_READ_ERR: 'DEPOSIT_READ_ERR',
+
+  
+  DEPOSITCOMMAND_READ_BEGIN: 'DEPOSITCOMMAND_READ_BEGIN',
+  DEPOSITCOMMAND_READ_SUCCESS: 'DEPOSITCOMMAND_READ_SUCCESS',
+  DEPOSITCOMMAND_READ_ERR: 'DEPOSITCOMMAND_READ_ERR',
+
+  APPROVEDEP_BEGIN: 'APPROVEDEP_BEGIN',
+  APPROVEDEP_SUCCESS: 'APPROVEDEP_SUCCESS',
+  APPROVEDEP_ERR: 'APPROVEDEP_ERR',
 
   commandsReadBegin: () => {
     return {
@@ -89,6 +101,51 @@ const actions = {
       type: actions.PROJECT_READ_BEGIN,
     };
   },
+  depositsReadBegin: () => {
+    return {
+      type: actions.DEPOSIT_READ_BEGIN,
+    };
+  },
+
+  depositsReadSuccess: (data) => {
+    return {
+      type: actions.DEPOSIT_READ_SUCCESS,
+      data,
+    };
+  },
+
+  depositsReadErr: (err) => {
+    return {
+      type: actions.DEPOSIT_READ_ERR,
+      err,
+    };
+  },
+
+  depositCommandReadBegin: () => {
+    return {
+      type: actions.DEPOSITCOMMAND_READ_BEGIN,
+    };
+  },
+
+  depositCommandReadSuccess: (data) => {
+    return {
+      type: actions.DEPOSITCOMMAND_READ_SUCCESS,
+      data,
+    };
+  },
+
+  depositCommandReadErr: (err) => {
+    return {
+      type: actions.DEPOSITCOMMAND_READ_ERR,
+      err,
+    };
+  },
+
+  projectsReadBegin: () => {
+    return {
+      type: actions.PROJECT_READ_BEGIN,
+    };
+  },
 
   projectsReadSuccess: (data) => {
     return {
@@ -124,6 +181,28 @@ const actions = {
       err,
     };
   },
+
+  
+  approveDepBegin: () => {
+    return {
+      type: actions.APPROVEDEP_BEGIN,
+    };
+  },
+
+  approveDepSuccess: (data) => {
+    return {
+      type: actions.APPROVEDEP_SUCCESS,
+      data,
+    };
+  },
+
+  approveDepErr: (err) => {
+    return {
+      type: actions.APPROVEDEP_ERR,
+      err,
+    };
+  },
+
 
 };
 
