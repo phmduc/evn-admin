@@ -35,7 +35,7 @@ function User(){
     const [input, setInput] = useState(false)
     const [withdraw, setWithDraw] = useState(0)
 
-    console.log(verifyUser)
+    console.log(user)
 
     const handleSubmitUpdate = (id)=>{
         const values= {
@@ -55,7 +55,7 @@ function User(){
         dispatch(getUserData(parseInt(params.id, 10)))
     }, [params.id, dispatch, user.phone]);
   if(user != undefined && users.length > 0 ){
-    const { bank_account, bank_name, cccd_back, cccd_front, phone, rank,status, refcode, verify, wallet, wallet_buyed, wallet_can_cash, wallet_cashed, wallet_deposited, wallet_win  } = user;
+    const { bank_account, bank_name, cccd_back, cccd_front,real_name, real_phone, id_number, phone, rank,status, refcode, verify, wallet, wallet_buyed, wallet_can_cash, wallet_cashed, wallet_deposited, wallet_win  } = user;
     return (
         <CardToolbox>
             <UserCarrdTop>
@@ -311,11 +311,26 @@ function User(){
                                                 <Radio value={'Chưa xác minh'}>Chưa xác minh</Radio>
                                             </Radio.Group>
                                         </Form.Item>
+                                        <Form.Item name="real_name"  label="Họ và tên thật" initialValue={real_name}>
+                                            <Input disabled value={real_name}  />
+                                        </Form.Item>
+                                        <Form.Item name="id_number"  label="Số CCCD/CMND" initialValue={id_number}>
+                                            <Input disabled value={id_number} />
+                                        </Form.Item>
+                                        <Form.Item name="phone_real"  label="Số điện thoại liên hệ" initialValue={real_phone}>
+                                            <Input disabled  value={real_phone} />
+                                        </Form.Item>
                                         <Form.Item name="status" label="Trạng thái hoạt động" initialValue={status}>
                                             <Radio.Group  onChange={(e)=>{setstatusUser(e.target.value)}} >
                                                 <Radio value={'active'}>Hoạt động</Radio>
                                                 <Radio value={'inactive'}>Khoá tài khoản</Radio>
                                             </Radio.Group>
+                                        </Form.Item>
+                                        <Form.Item name="status" label="Ảnh CCCD mặt trước" >
+                                            <img style={{'width' : '100%'}} src={cccd_front} />
+                                        </Form.Item>
+                                        <Form.Item name="status" label="Ảnh CCCD mặt trước" >
+                                            <img style={{'width' : '100%'}} src={cccd_back} />
                                         </Form.Item>
                                         <Form.Item>
                                             <div className="add-user-bottom text-right">
