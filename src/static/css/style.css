@@ -1651,7 +1651,17 @@ html[dir="rtl"] .ninjadash-upload-basic .ninjadash-upload-browse {
   width: 45%;
 }
 .table-responsive.userjs .ant-table-content .ant-table-cell:nth-child(2) {
+  width: 14%;
+}
+
+.table-responsive.notify .ant-table-content .ant-table-cell:nth-child(2){
   width: 20%;
+}
+.table-responsive.notify .ant-table-content .ant-table-cell:nth-child(3){
+  width: 30%;
+}
+.table-responsive.notify .ant-table-content .ant-table-cell:first-child{
+  width: 5%;
 }
 .ant-table-tbody p{
   margin-bottom: 0;

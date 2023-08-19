@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
-import { Row, Col, Table, Progress, Pagination, Tag } from 'antd';
+import { Row, Col, Table, Progress, Pagination, Tag, Checkbox } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import UilEllipsisH from '@iconscout/react-unicons/icons/uil-ellipsis-h';
@@ -10,107 +10,91 @@ import { ProjectPagination, ProjectListTitle, ProjectListAssignees, ProjectList 
 import { Dropdown } from '../../../components/dropdown/dropdown';
 import { blogsDeleteData } from '../../../redux/blogs/actionCreator';
 import { categoriesGetData } from '../../../redux/blogs/actionCreator';
+import { readNotificationList } from '../../../redux/notification/actionCreator';
+import { readNotificationHide } from '../../../redux/notification/actionCreator';
 
 function BlogsLists() {
   const dispatch = useDispatch();
-  const blog = useSelector((state) => state.blogs.blogs);
- 
-  const { category } = useSelector((state) => ({
-    category: state.category.category,
- 
+  const [ren, setren] = useState(false)
+  const { notification } = useSelector((state) => ({
+    notification: state.notification.data,
   }));
-  let current
 
-
-  if(category.length>0){
-    current = category.filter(elem=>{
-     return elem.name == 'Thông báo nền tảng'
-    })[0].id
-  }
 
 
   useEffect(() => {
-    dispatch(categoriesGetData())
-  }, [blog]);
+    dispatch(readNotificationList());
 
-  const onShowSizeChange = (current, pageSize) => {
-    setState({ ...state, current, pageSize });
-  };
-
-  const onHandleChange = (current, pageSize) => {
-    // You can create pagination in here
-    setState({ ...state, current, pageSize });
-  };
-
+  }, [dispatch, ren]);
   const dataSource = [];
-  if (blog && blog.length>0)
-    blog.map((value) => {
-      if(value.categories.some(elem=>{
-        return elem == current;
-      })){
-      const { id, author , date, title: { rendered: titleRender }, excerpt: { rendered: excerptRender } } = value;
+  if (notification && notification.length > 0)
+    notification.map((value) => {
+      const { id, created, type, content, user_id, user_phone, trash } = value;
       return dataSource.push({
         key: id,
-        blog: (
+        id: <span className="date-started">{id}</span>,
+        date: <span className="date-started">{created}</span>,
+        content: (
           <ProjectListTitle>
-            <Heading as="h4">
-              <Link to={`/admin/blogs/blogDetails/${id}`}>{titleRender}</Link>
-            </Heading>
+            <Heading as="h4">{content}</Heading>
           </ProjectListTitle>
         ),
-        Excerpt: <span className="date-started" dangerouslySetInnerHTML={{ __html: excerptRender }}></span>,
-        Date: <span className="date-started">{moment(date).format("DD MMM YYYY")}</span>,
-        Author: <span className="date-started">Weable</span>,
-
-
-        // status: <Tag className={status}>{status}</Tag>,
-        // completion: (
-        //   <div className="project-list-progress">
-        //     <Progress percent={status === 'complete' ? 100 : percentage} strokeWidth={5} className="progress-primary" />
-        //     <p>12/15 Task Completed</p>
-        //   </div>
-        // ),
-        action: (
-          <Dropdown
-            className="wide-dropdwon"
-            content={
-              <>
-                <Link to={`/admin/blogs/blogDetails/${id}`} >View</Link>
-                <Link to="#">Edit</Link>
-                <Link to="#" onClick={()=>{dispatch(blogsDeleteData(id,()=>{window.location.reload()}))}} >Delete</Link>
-
-              </>
-            }
-          >
-            <Link to="#">
-              <UilEllipsisH />
-            </Link>
-          </Dropdown>
+        user: <span className="date-started">{user_phone}</span>,
+        type: (
+          <span className="date-started">
+            {type == 'tax' ? (
+              <span className={type}>Thông báo thuế</span>
+            ) : type == 'insurance' ? (
+              <span className={type}>Thông báo bảo hiểm</span>
+            ) : type == 'deposit' ? (
+              <span className={type}>Nạp tiền</span>
+            ) : type == 'cash' ? (
+              <span className={type}>Rút tiền</span>
+            ) : type == 'verified' ? (
+              <span className={type}>Xác minh thành công </span>
+            ) : type == 'locked' ? (
+              <span className={type}>Tài khoản bị khoá</span>
+            ) : type == 'unlocked' ? (
+              <span className={type}>Mở khoá tài khoản</span>
+            ) : (
+              <span className={type}>Thông báo đầu tư</span>
+            )}
+          </span>
         ),
+
+        action: (type == 'insurance' || type == 'tax') ? (trash == '0') ?
+          (<Checkbox onChange={(e)=>{
+            dispatch(readNotificationHide(id, ()=>{setren(!ren)}))
+          }}>Ẩn</Checkbox>)
+         : (trash == '1') ? (<Checkbox checked>Ẩn</Checkbox>) : '' : '' ,
       });
-    }
     });
 
   const columns = [
     {
-      title: 'Blog',
-      dataIndex: 'blog',
-      key: 'blog',
-    },
-    {
-      title: 'Excerpt',
-      dataIndex: 'Excerpt',
-      key: 'Excerpt',
+      title: 'ID',
+      dataIndex: 'id',
+      key: 'id',
     },
     {
       title: 'Date',
-      dataIndex: 'Date',
-      key: 'Date',
+      dataIndex: 'date',
+      key: 'date',
     },
     {
-      title: 'Author',
-      dataIndex: 'Author',
-      key: 'Author',
+      title: 'Content',
+      dataIndex: 'content',
+      key: 'content',
+    },
+    {
+      title: 'User',
+      dataIndex: 'user',
+      key: 'user',
+    },
+    {
+      title: 'Type',
+      dataIndex: 'type',
+      key: 'type',
     },
     {
       title: '',
@@ -124,25 +108,11 @@ function BlogsLists() {
       <Col xs={24}>
         <Cards headless>
           <ProjectList>
-            <div className="table-responsive">
-              <Table pagination={false} dataSource={dataSource} columns={columns} />
+            <div className="table-responsive notify">
+              <Table pagination={true} dataSource={dataSource} columns={columns} />
             </div>
           </ProjectList>
         </Cards>
-      </Col>
-      <Col xs={24} className="pb-30">
-        <ProjectPagination>
-          {blog.length ? (
-            <Pagination
-              onChange={onHandleChange}
-              showSizeChanger
-              onShowSizeChange={onShowSizeChange}
-              pageSize={10}
-              defaultCurrent={1}
-              total={40}
-            />
-          ) : null}
-        </ProjectPagination>
       </Col>
     </Row>
   );

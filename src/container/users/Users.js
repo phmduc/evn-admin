@@ -51,7 +51,7 @@ console.log(users)
 
     let usersTableData= []
     users.map((user) => {
-    const { user_id,usermeta:{phone, ref_code, rank, wallet, wallet_can_cash,  wallet_buyed, wallet_cashed, verify, status } } = user;
+    const { user_id,usermeta:{phone, refcode, inivationcode, rank, wallet, wallet_can_cash,  wallet_buyed, wallet_cashed, verify, status } } = user;
     return usersTableData.push({
       key: user_id,
       user: (
@@ -69,10 +69,18 @@ console.log(users)
         <div className="user-info">
           <figcaption>
             <Heading className="user-name" as="h6">
-                {ref_code ? ref_code : 'Chưa cập nhật'} 
+                {refcode ? refcode : 'Chưa cập nhật'} 
             </Heading>
           </figcaption>
         </div>,
+      invitation:  
+      <div className="user-info">
+        <figcaption>
+          <Heading className="user-name" as="h6">
+              {inivationcode} 
+          </Heading>
+        </figcaption>
+      </div>,
       rank:  
       <div className="user-info">
         <figcaption>
@@ -129,6 +137,11 @@ console.log(users)
       title: 'Mã mời',
       dataIndex: 'invite',
       key: 'invite',
+    },
+     {
+      title: 'Mã người mời',
+      dataIndex: 'invitation',
+      key: 'invitation',
     },
     {
       title: 'Hạng TV',

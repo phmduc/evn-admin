@@ -1,16 +1,10 @@
 import React, { lazy, Suspense, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Row, Col, Progress, Spin, Input  } from 'antd';
-import moment from 'moment';
-import UilPlus from '@iconscout/react-unicons/icons/uil-plus';
-import UilCheck from '@iconscout/react-unicons/icons/uil-check';
+import { Row, Col, Progress, Spin, Input, Select  } from 'antd';
+
 import UilEditAlt from '@iconscout/react-unicons/icons/uil-edit-alt';
 import UilTrashAlt from '@iconscout/react-unicons/icons/uil-trash-alt';
-import UilListUl from '@iconscout/react-unicons/icons/uil-list-ul';
-import UilChartPie from '@iconscout/react-unicons/icons/uil-chart-pie';
-import UilWebGridAlt from '@iconscout/react-unicons/icons/uil-web-grid-alt';
-import UilClock from '@iconscout/react-unicons/icons/uil-clock';
-import UilUserPlus from '@iconscout/react-unicons/icons/uil-user-plus';
+
 import { Link, NavLink, Routes, Route, useParams , useNavigate} from 'react-router-dom';
 import { ProjectDetailsWrapper, TaskLists } from './style';
 import { PageHeader } from '../../components/page-headers/page-headers';
@@ -22,59 +16,50 @@ import { filterSinglePage } from '../../redux/blogs/actionCreator';
 import ReactQuill from 'react-quill';
 import { RadioChangeEvent } from 'antd';
 import { Radio } from 'antd';
-import { blogsCreateData } from '../../redux/blogs/actionCreator';
-import { categoriesGetData } from '../../redux/blogs/actionCreator';
+import { getUsersData } from '../../redux/users/actionCreator';
+import { createNotification } from '../../redux/notification/actionCreator';
 
 function BlogCreate() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
-//   const blog = useSelector((state) => state.blog.data);
-//   const params = useParams();
-//   useEffect(() => {
-//       dispatch(filterSinglePage(parseInt(params.id, 10)));
-//   }, [params.id, dispatch]);
+   const [type, setType] = useState('');
 
-//   console.log(blog)
-   const author = sessionStorage.getItem('user_id');
-
-   const { TextArea } = Input;
-
-   const [value, setValue] = useState('');
-
-   const [title, setTitle] = useState('');
+   const [user_id, setUser] = useState('');
 
    const [excerpt, setExcerpt] = useState('');
 
-   const [status, setStatus] = useState('publish');
-
-   const { category } = useSelector((state) => ({
-     category: state.category.category,
   
-   }));
-   let current
- 
-   if(category.length>0){
-     current = category.filter(elem=>{
-      return elem.name == 'Thông báo nền tảng'
-     })[0].id
-   }
- 
+
+   let {  users } = useSelector((state) => {
+    return {
+      users: state.users.data,
+    };
+  });
+
+  let sorted
+  if(users){
+    sorted = users.map((elem)=>{
+      return{
+        label: elem.usermeta.phone,
+        value: elem.user_id
+
+      }
+    })
+  }
+   console.log(type, user_id)
+
    const handleCreateSubmit = ()=>{
      const values={
-       title: title,
-       status: status,
-       excerpt: excerpt,
-       content: value,
-       author: author,
-       categories: [current]
+       user_ids: user_id,
+       type,
+       content: excerpt
      }
-     dispatch(blogsCreateData(values, () => {navigate('/admin/blogs/notifications/view')}));
-
+     dispatch(createNotification(values))
    }
 
    useEffect(()=>{
-     dispatch(categoriesGetData())
+      dispatch(getUsersData())
+
    },[dispatch])
     return (
       <ProjectDetailsWrapper>
@@ -102,34 +87,57 @@ function BlogCreate() {
         <Main>
           <Row gutter={25}>
             <Col xs={24}>
-        
               <div className="about-project-wrapper" style={{minHeight: "unset"}}>
-                <Cards title="Status">
-                  <Radio.Group onChange={(e)=>{setStatus(e.target.value)}} value={status} >
-                    <Radio value={'publish'}>Publish</Radio>
-                    <Radio value={'future'}>Future</Radio>
-                    <Radio value={'draft'}>Draft</Radio>
-                    <Radio value={'pending'}>Pending</Radio>
-                    <Radio value={'private'}>Private</Radio>
-                  </Radio.Group>
+                <Cards title="Chọn loại thông báo">
+                  <Select
+                      onChange={(e)=>{setType(e)}}
+                      showSearch
+                      style={{
+                      width: '100%',
+                      marginLeft: 0
+                      }}
+                      placeholder="Search to Select"
+                      optionFilterProp="children"
+                      filterOption={(input, option) => (option?.label ?? '').includes(input)}
+                      filterSort={(optionA, optionB) =>
+                      (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
+                      }
+                      options = {[
+                        {
+                          value: 'tax',
+                          label: 'Thông báo thuế'
+                        },
+                        {
+                          value: 'insurance',
+                          label: 'Thông báo bảo hiểm'
+                        },
+                      ]}
+                  />
                 </Cards>
               </div>
               <div className="about-project-wrapper" style={{minHeight: "unset"}}>
-                <Cards title="Blog Title">
-                  <Input placeholder="Input title" value={title} onChange={(e)=>{
-                      setTitle(e.target.value)
-                  }} />
+                <Cards title="Chọn người nhận">
+                   <Select
+                      onChange={(e)=>{setUser(e)}}
+                      showSearch
+                      mode="multiple"
+                      style={{
+                      width: '100%',
+                      marginLeft: 0
+                      }}
+                      placeholder="Search to Select"
+                      optionFilterProp="children"
+                      filterOption={(input, option) => (option?.label ?? '').includes(input)}
+                      filterSort={(optionA, optionB) =>
+                      (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
+                      }
+                        options={sorted ? sorted : []}
+                  />
                 </Cards>
               </div>
               <div className="about-project-wrapper" style={{minHeight: "unset"}}>
-                <Cards title="Blog Content">
-                  <ReactQuill theme="snow" value={value} onChange={setValue} />
-                </Cards>
-              </div>
-              <div className="about-project-wrapper" style={{minHeight: "unset"}}>
-                <Cards title="Excerpt">
+                <Cards title="Nội dung thông báo">
                   <ReactQuill theme="snow" placeholder="Excerpt..."  value={excerpt} onChange={setExcerpt} />
-                 
                 </Cards>
               </div>
             </Col> 
