@@ -1,5 +1,93 @@
 /* Utilitiy classes */
 
+@font-face {
+	font-family: 'Roboto';
+	src: url('../fonts/Roboto-Bold.woff') format('woff');
+	font-weight: bold;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Roboto';
+	src: url('../fonts/Roboto-BoldItalic.woff') format('woff');
+	font-weight: bold;
+	font-style: italic;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Roboto';
+	src: url('../fonts/Roboto-Medium.woff') format('woff');
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Roboto';
+	src: url('../fonts/Roboto-MediumItalic.woff') format('woff');
+	font-weight: 500;
+	font-style: italic;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Roboto';
+	src: url('../fonts/Roboto-Regular.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Roboto';
+	src: url('../fonts/Roboto-Italic.woff') format('woff');
+	font-weight: normal;
+	font-style: italic;
+	font-display: swap;
+}
+
+
+:root {
+	--heading-font: 'Roboto', sans-serif;
+	--body-font: 'Roboto', sans-serif;
+	--small-shadow: 0 10px 50px 0 rgb(231 230 236 / 53%);
+	--medium-shadow: 0 5px 20px 0 rgb(39 40 40 / 15%)
+}
+
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: var(--heading-font);
+	font-weight: bold !important;
+	color: var(--dark)
+}
+
+a:hover {
+	text-decoration: none !important;
+}
+.ant-card-head-title {
+	font-family: var(--body-font) !important;
+
+}
+body  {
+	font-family: var(--body-font) !important;
+	font-weight: normal !important;
+}
+
+
+
+
 .spin {
   height: 100vh;
   display: flex;
