@@ -83,11 +83,14 @@ const updateUserData = (id, values)=>{
             } 
             if(values.verify){
                 promises.push(DataService.put(`/wp-json/dbevn/v1/users/${id}/verify`,{},{verify: values.verify})) 
+                toast.success('Đã thay đổi xác minh')
             } 
             if(values.status == 'active'){
                 promises.push(DataService.post(`/wp-json/dbevn/v1/unlock/user-${id}`) )
+                toast.success('Đã thay đổi trạng thái hoạt động')
             } else  if(values.status == 'inactive'){
                 promises.push(DataService.post(`/wp-json/dbevn/v1/lock/user-${id}`) )
+                toast.success('Đã thay đổi trạng thái hoạt động')
             } 
             try {
                 const responses = await Promise.all(promises);

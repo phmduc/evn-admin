@@ -2,7 +2,8 @@
   "name": "HexaDash",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://dbevn.webmau.net/",
+  "homepage": "https://superzone.quydautunoiboevn.com",
+  "proxy": "https://apiserver.quydautunoiboevn.com/",
   "dependencies": {
     "@dnd-kit/core": "^6.0.8",
     "@dnd-kit/sortable": "^7.0.2",

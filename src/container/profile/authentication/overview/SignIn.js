@@ -67,12 +67,11 @@ function SignIn() {
               <Form.Item
                 name="phone"
                 rules={[{ message: 'Please input your Phone number!', required: true }]}
-                initialValue="0842943333"
                 label="Phone number"
               >
-                <Input placeholder="name@example.com" />
+                <Input placeholder="Phone number" />
               </Form.Item>
-              <Form.Item name="password" initialValue="Since@2020" label="Password">
+              <Form.Item name="password" label="Password">
                 <Input.Password placeholder="Password" />
               </Form.Item>
               <div className="ninjadash-auth-extra-links">
@@ -85,9 +84,7 @@ function SignIn() {
             </Form>
           </div>
           <div className="ninjadash-authentication-bottom">
-            <p>
-              Don`t have an account?<Link to="/register">Sign up</Link>
-            </p>
+           
           </div>
         </AuthFormWrap>
       </Col>
