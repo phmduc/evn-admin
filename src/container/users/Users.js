@@ -1,5 +1,5 @@
 import React, { useState, lazy, Suspense } from 'react';
-import { Row, Col, Pagination, Skeleton } from 'antd';
+import { Row, Col, Pagination, Skeleton, Popconfirm } from 'antd';
 import UilPlus from '@iconscout/react-unicons/icons/uil-plus';
 import UilEye from '@iconscout/react-unicons/icons/uil-eye';
 import UilEdit from '@iconscout/react-unicons/icons/uil-edit';
@@ -15,12 +15,14 @@ import { Cards } from '../../components/cards/frame/cards-frame';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUsersData } from '../../redux/users/actionCreator';
 import { useEffect } from 'react';
+import { deleteUser } from '../../redux/users/actionCreator';
 import { TableWrapper } from '../styled';
 import { UserTableStyleWrapper } from '../pages/style';   
 import Heading from '../../components/heading/heading';
 
 function Users() {
 
+  const [render, setRen] =useState(false)
   const dispatch = useDispatch();
   
   let {  users } = useSelector((state) => {
@@ -32,21 +34,38 @@ function Users() {
   const [search, setSearch] = useState('')
   useEffect(()=>{
     dispatch(getUsersData())
-  },[dispatch])
+  },[dispatch, render])
 
   const handleSearch = (searchText) => {
     setSearch(searchText)
 };
 
-console.log(users)
+  const confirm = (id)=>{
+    dispatch(deleteUser(id))
+    setRen(true)
+  }
 
   const searchResult = users.filter(elem=>{
     return elem.usermeta.phone.includes(search) 
   })
 
   if(searchResult){
-    users = searchResult
+    users =  searchResult;
   }
+  const sortedItems = users.sort((a, b) => {
+    if (
+      Number(a.user_id) > Number(b.user_id)
+    ) {
+      return -1;
+    }
+    if (
+      Number(a.user_id) < Number(b.user_id)
+
+    ) {
+      return 1;
+    }
+    return 0;
+  });
 
 
     let usersTableData= []
@@ -119,9 +138,17 @@ console.log(users)
           <Link className="btn-icon" type="info" to={`/admin/user/${user_id}`} shape="circle">
             <UilEdit />
           </Link>
-          <Button className="btn-icon" type="danger" to="#" shape="circle">
-            <UilTrashAlt />
-          </Button>
+          <Popconfirm
+            placement="right"
+            title='Xác nhận xoá user?'
+            description='Bạn có chắc xoá user này?'
+            onConfirm={()=>confirm(user_id)}
+            okText="Có"
+            cancelText="Huỷ"
+          >
+            <Button><UilTrashAlt />
+              </Button>
+          </Popconfirm>
         </div>
       ),
     });

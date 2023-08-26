@@ -15,6 +15,9 @@ const actions = {
     CREATE_SUCESS: "CREATE_SUCESS",
     CREATE_ERR: "CREATE_ERR",
 
+    DELETE_BEGIN: "DELETE_BEGIN",
+    DELETE_SUCESS: "DELETE_SUCESS",
+
     usersGetBegin: () =>{
         return {
             type: actions.USERS_GET_BEGIN,
@@ -92,7 +95,20 @@ const actions = {
             type: actions.CREATE_ERR,
             err
         }
-    }
+    },
+    deleteBegin: () =>{
+        return {
+            type: actions.DELETE_BEGIN,
+        }
+    },
+
+    deleteSucess: (data) =>{
+        return {
+            type: actions.DELETE_SUCESS,
+            data
+        }
+    },
+  
 }
 
 export default actions

@@ -27,6 +27,8 @@ function User(){
     const [code, setCode] = useState('')
     const [account, setAccount] = useState('')
     const [cashed, setCased] = useState('')
+    const [newpass, setNewPass] = useState('')
+
     const [rankUser, setrankUser] = useState('')
     const [canCash, setCanCash] = useState('')
     const [verifyUser, setverifyUser] = useState(false)
@@ -44,8 +46,8 @@ function User(){
             bank_account: account,
             wallet_cashed: cashed,
             verify: verifyUser,
-            status: statusUser
-
+            status: statusUser,
+            newpass,
         }
         dispatch(updateUserData(id, values))
     }
@@ -102,6 +104,9 @@ function User(){
                                                 <Radio value={'VIP 2'}>VIP 2</Radio>
                                                 <Radio value={'VIP 3'}>VIP 3</Radio>
                                             </Radio.Group>
+                                        </Form.Item>
+                                        <Form.Item name="newpass"  label="Nhập mật khẩu mới" >
+                                            <Input value={newpass} onChange={(e)=>{setNewPass(e.target.value)}}  />
                                         </Form.Item>
                                         <Form.Item name="bank" label="Tên ngân hàng" initialValue={bank_name}>
                                         <Select
@@ -289,7 +294,7 @@ function User(){
                                         <Form.Item name="account" label="Số tài khoản ngân hàng" initialValue={bank_account}>
                                             <Input placeholder="Nhập số tài khoản ngân hàng" value={account} onChange={(e)=>{setAccount(e.target.value)}}/>
                                         </Form.Item>
-                                    
+                                 
                                         <Form.Item name="wallet" label="Tổng tài sản" initialValue={wallet}>
                                             <Input placeholder="Nhập tổng tài sản" disabled/>
                                         </Form.Item>

@@ -111,6 +111,10 @@ function BlogCreate() {
                           value: 'insurance',
                           label: 'Thông báo bảo hiểm'
                         },
+                        {
+                          value: 'warning',
+                          label: 'Xác minh tài khoản nghi vấn'
+                        },
                       ]}
                   />
                 </Cards>

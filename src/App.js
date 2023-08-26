@@ -67,6 +67,21 @@ function ProviderConfig() {
 }
 
 function App() {
+  const [notifications, setNotifications] = useState([]);
+  useEffect(() => {
+    const eventSource = new EventSource('https://dbevn.webmau.net/wp-content/plugins/dbevn/includes/sse.php');
+
+    eventSource.onmessage = (event) => {
+      // Xử lý dữ liệu realtime ở đây
+      console.log(event);
+    };
+
+  
+
+    return () => {
+      eventSource.close();
+    };
+}, []);
   return (
     <Provider store={store}>
       <ProviderConfig />

@@ -3,7 +3,7 @@ import { DataService } from "../../config/dataService/dataService";
 import { toast } from "react-toastify";
 
 
-const { usersGetBegin, usersGetErr, usersGetSucess, userGetBegin, userGetErr, userGetSucess, userUpdateBegin, userUpdateSucess, userUpdateErr, createBegin, createErr, createSucess } = actions
+const {deleteBegin,deleteSucess, usersGetBegin, usersGetErr, usersGetSucess, userGetBegin, userGetErr, userGetSucess, userUpdateBegin, userUpdateSucess, userUpdateErr, createBegin, createErr, createSucess } = actions
 
 const getUsersData = ()=>{
     return async(dispatch) => {
@@ -42,7 +42,18 @@ const createUser = (value)=>{
     }
 }
 
-
+const deleteUser = (id)=>{
+    return async(dispatch) => {
+        dispatch(deleteBegin());
+        try{
+            const data = await DataService.delete(`/wp-json/wp/v2/users/${id}?reassign&force=true`)
+            dispatch(deleteSucess(data.data))
+            toast.success('Xoá user thành công!!!')
+        }catch(err){
+            toast.error(err.response.data.message)
+        }
+    }
+}
 
 const updateUserData = (id, values)=>{
     return async(dispatch) => {
@@ -85,6 +96,14 @@ const updateUserData = (id, values)=>{
                 promises.push(DataService.put(`/wp-json/dbevn/v1/users/${id}/verify`,{},{verify: values.verify})) 
                 toast.success('Đã thay đổi xác minh')
             } 
+            if(values.newpass){
+                const data = {
+                    user_id: id,
+                    new_password: values.newpass    
+                }
+                promises.push(DataService.post(`/wp-json/dbevn/v1/users/change-pass`,data)) 
+                toast.success('Đã thay đổi mật khẩu')
+            } 
             if(values.status == 'active'){
                 promises.push(DataService.post(`/wp-json/dbevn/v1/unlock/user-${id}`) )
                 toast.success('Đã thay đổi trạng thái hoạt động')
@@ -103,4 +122,4 @@ const updateUserData = (id, values)=>{
 }
 
 
-export {getUsersData, getUserData, updateUserData, createUser}
+export {getUsersData, getUserData, updateUserData, createUser, deleteUser}

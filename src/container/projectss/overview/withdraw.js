@@ -17,11 +17,9 @@ import { toast } from 'react-toastify';
 function Withdraw(props) {
   let withs = useSelector((state) => state.withs.withs)
   
-  console.log(withs)
   const dispatch = useDispatch()
 
   const searchResult = (withs.filter(elem=>{
-    console.log(elem)
     return elem.user_phone.includes(props.search) || elem.value.includes(props.search)
   }))
 
