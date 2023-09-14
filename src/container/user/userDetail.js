@@ -124,169 +124,161 @@ function User(){
                                             }
                                             options={[
                                             {
-                                                value: 'Techcombank',
-                                                label: 'Techcombank',
-                                            },
-                                            {
-                                                value: 'Sacombank',
-                                                label: 'Sacombank',
-                                            },
-                                            {
-                                                value: 'Vietcombank',
-                                                label: 'Vietcombank',
-                                            },
-                                            {
-                                                value: 'Asia Commercial Bank',
-                                                label: 'Asia Commercial Bank',
-                                            },
-                                            {
-                                                value: 'DongA Bank',
-                                                label: 'DongA Bank',
-                                            },
-                                            {
-                                                value: 'Vietin Bank',
-                                                label: 'Vietin Bank',
-                                            },
-                                            {
-                                                value: 'Bank for Investment and Development of Vietnam',
-                                                label: 'Bank for Investment and Development of Vietnam',
-                                            },
-                                            {
-                                                value: 'Eximbank',
-                                                label: 'Eximbank',
-                                            },
-                                            {
-                                                value: 'Bank Central Asia',
-                                                label: 'Bank Central Asia',
-                                            },
-                                            {
-                                                value: 'Bank Negara Indonesia',
-                                                label: 'Bank Negara Indonesia',
-                                            },
-                                            {
-                                                value: 'Bank Rakyat Indonesia',
-                                                label: 'Bank Rakyat Indonesia',
-                                            },
-                                            {
-                                                value: 'CIMB Niaga',
-                                                label: 'CIMB Niaga',
-                                            },
-                                            {
-                                                value: 'Vietnam Prosperity Joint-Stock Commercial Bank',
-                                                label: 'Vietnam Prosperity Joint-Stock Commercial Bank',
-                                            },
-                                            {
-                                                value: 'Military Commercial Joint Stock Bank',
-                                                label: 'Military Commercial Joint Stock Bank',
-                                            },
-                                            {
-                                                value: 'Tien Phong Commercial',
-                                                label: 'Tien Phong Commercial',
-                                            },
-                                            {
-                                                value: 'Agribank',
-                                                label: 'Agribank',
-                                            },
-                                            {
-                                                value: 'Lien Viet Post Joint Stock Commercial Bank',
-                                                label: 'Lien Viet Post Joint Stock Commercial Bank',
-                                            },
-                                            {
-                                                value: 'Saigon - Hanoi Commercial Joint Stock Bank',
-                                                label: 'Saigon - Hanoi Commercial Joint Stock Bank',
-                                            },
-                                            {
-                                                value: 'Vietnam Public Joint-stock Commercial Bank',
-                                                label: 'Vietnam Public Joint-stock Commercial Bank',
-                                            },
-                                            {
-                                                value: 'Saigon Bank',
-                                                label: 'Saigon Bank',
-                                            },
-                                            {
-                                                value: 'Southeast Asia Commercial Joint Stock Bank',
-                                                label: 'Southeast Asia Commercial Joint Stock Bank',
-                                            },
-                                            {
-                                                value: 'Kien Long Commercial Joint Stock Bank',
-                                                label: 'Kien Long Commercial Joint Stock Bank',
-                                            },
-                                            {
-                                                value: 'Nam A Commercial Joint Stock Bank',
-                                                label: 'Nam A Commercial Joint Stock Bank',
-                                            },
-                                            {
-                                                value: 'National Citizen Commercial Joint Stock Bank',
-                                                label: 'National Citizen Commercial Joint Stock Bank',
-                                            },
-                                            {
-                                                value: 'HD Bank',
-                                                label: 'HD Bank',
-                                            },
-                                            {
-                                                value: 'Orient Commercial Joint Stock Bank',
-                                                label: 'Orient Commercial Joint Stock Bank',
-                                            },
-                                            {
-                                                value: 'Vietnam International Commercial Joint Stock Bank',
-                                                label: 'Vietnam International Commercial Joint Stock Bank',
-                                            },
-                                            {
-                                                value: 'Sai Gon Joint Stock Commercial Bank',
-                                                label: 'Sai Gon Joint Stock Commercial Bank',
-                                            },
-                                            {
-                                                value: 'Saigon Bank for Industry and Trade',
-                                                label: 'Saigon Bank for Industry and Trade',
-                                            },
-                                            {
-                                                value: 'VietABank',
-                                                label: 'VietABank',
-                                            },
-                                            {
-                                                value: 'Bao Viet Bank',
-                                                label: 'Bao Viet Bank',
-                                            },
-                                            {
-                                                value: 'Vietnam Thuong Tin Commercial Joint Stock Bank',
-                                                label: 'Vietnam Thuong Tin Commercial Joint Stock Bank',
-                                            },
-                                            {
-                                                value: 'Petrolimex Group Commercial Joint Stock Bank',
-                                                label: 'Petrolimex Group Commercial Joint Stock Bank',
-                                            },
-                                            {
-                                                value: 'BIDV',
-                                                label: 'BIDV',
-                                            },
-                                            {
-                                                value: 'MB Bank',
-                                                label: 'MB Bank',
-                                            },
-                                            {
-                                                value: 'SeaBank',
-                                                label: 'SeaBank',
-                                            },
-                                            {
-                                                value: 'Shinhan bank',
-                                                label: 'Shinhan bank',
-                                            },
-                                            {
-                                                value: 'ACB Bank',
-                                                label: 'ACB Bank',
-                                            },
-                                            {
-                                                value: 'VIP Bank',
-                                                label: 'VIP Bank',
-                                            },
-                                            {
-                                                value: 'PCcombank',
-                                                label: 'PCcombank',
-                                            },
-                                            {
-                                                value: 'VIB Bank',
-                                                label: 'VIB Bank',
-                                            }
+                                                value: "Techcombank",
+                                                label: "Techcombank",
+                                                },
+                                                {
+                                                value: "Sacombank",
+                                                label: "Sacombank",
+                                                },
+                                                {
+                                                value: "Vietcombank",
+                                                label: "Vietcombank",
+                                                },
+                                                {
+                                                value: "Ngân hàng ACB",
+                                                label: "Ngân hàng ACB",
+                                                },
+                                                {
+                                                value: "DongA Bank",
+                                                label: "DongA Bank",
+                                                },
+                                                {
+                                                value: "Vietin Bank",
+                                                label: "Vietin Bank",
+                                                },
+                                                {
+                                                value: "BIDV",
+                                                label: "BIDV",
+                                                },
+                                                {
+                                                value: "Eximbank",
+                                                label: "Eximbank",
+                                                },
+                                                {
+                                                value: "Ngân hàng Trung ương Châu Á",
+                                                label: "Ngân hàng Trung ương Châu Á",
+                                                },
+                                                {
+                                                value: "Bank Negara Indonesia",
+                                                label: "Bank Negara Indonesia",
+                                                },
+                                                {
+                                                value: "Bank Rakyat Indonesia",
+                                                label: "Bank Rakyat Indonesia",
+                                                },
+                                                {
+                                                value: "CIMB Niaga",
+                                                label: "CIMB Niaga",
+                                                },
+                                                {
+                                                value: "VPBank",
+                                                label: "VPBank",
+                                                },
+                                                {
+                                                value: "Military Commercial Joint Stock Bank",
+                                                label: "Military Commercial Joint Stock Bank",
+                                                },
+                                                {
+                                                value: "TPBank",
+                                                label: "TPBank",
+                                                },
+                                                {
+                                                value: "Agribank",
+                                                label: "Agribank",
+                                                },
+                                                {
+                                                value: "LietVietPostBank",
+                                                label: "LietVietPostBank",
+                                                },
+                                                {
+                                                value: "SHB Bank",
+                                                label: "SHB Bank",
+                                                },
+                                                {
+                                                value: "PVcomBank",
+                                                label: "PVcomBank",
+                                                },
+                                                {
+                                                value: "Saigon Bank",
+                                                label: "Saigon Bank",
+                                                },
+                                                {
+                                                value: "SeABank",
+                                                label: "SeABank",
+                                                },
+                                                {
+                                                value: "KienlongBank",
+                                                label: "KienlongBank",
+                                                },
+                                                {
+                                                value: "Nam Á Bank",
+                                                label: "Nam Á Bank",
+                                                },
+                                                {
+                                                value: "National Citizen Commercial Joint Stock Bank",
+                                                label: "National Citizen Commercial Joint Stock Bank",
+                                                },
+                                                {
+                                                value: "HD Bank",
+                                                label: "HD Bank",
+                                                },
+                                                {
+                                                value: "Orient Commercial Joint Stock Bank",
+                                                label: "Orient Commercial Joint Stock Bank",
+                                                },
+                                                {
+                                                value: "VIB Bank",
+                                                label: "VIB Bank",
+                                                },
+                                                {
+                                                value: "Ngân hàng SCB",
+                                                label: "Ngân hàng SCB",
+                                                },
+                                                {
+                                                value: "SaigonBank",
+                                                label: "SaigonBank",
+                                                },
+                                                {
+                                                value: "VietABank",
+                                                label: "VietABank",
+                                                },
+                                                {
+                                                value: "Bao Viet Bank",
+                                                label: "Bao Viet Bank",
+                                                },
+                                                {
+                                                value: "VietBank",
+                                                label: "VietBank",
+                                                },
+                                                {
+                                                value: "PG Bank",
+                                                label: "PG Bank",
+                                                },
+                                                {
+                                                value: "MB Bank",
+                                                label: "MB Bank",
+                                                },
+                                                {
+                                                value: "SeaBank",
+                                                label: "SeaBank",
+                                                },
+                                                {
+                                                value: "Shinhan bank",
+                                                label: "Shinhan bank",
+                                                },
+                                                {
+                                                value: "VIP Bank",
+                                                label: "VIP Bank",
+                                                },
+                                                {
+                                                value: "PCcombank",
+                                                label: "PCcombank",
+                                                },
+                                                {
+                                                value: "Ngân hàng An Binh",
+                                                label: "Ngân hàng An Binh",
+                                                },
 
                                             ]}
                                         />
